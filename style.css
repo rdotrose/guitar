@@ -107,7 +107,7 @@ body{
 }
 
 #lyric-chord-container{
-  z-index: 3;
+  z-index:3;
   width: 100vw;
   min-height: 100vh;
   padding: 0 calc((100vw/2 - var(--tableSize)/2));
@@ -161,7 +161,7 @@ body{
   display: flex;
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 475px){
   :root{
     --tableSize: 96vw;
   }
@@ -184,7 +184,7 @@ body{
   }
 }
 
-@media screen and (max-width: 672px){
+@media screen and (min-width: 475px) and (max-width: 672px){
   :root{
     --tableSize: 96vw;
   }
@@ -200,16 +200,10 @@ body{
     margin: 0;
   }
   .query-small{
-    display: none;
+    display: inline;
   }
   #main-table{
     gap:0.4rem;
-  }
-}
-
-@media screen and (max-width: 425px){
-  .query-small{
-    display: inline;
   }
 }
 
