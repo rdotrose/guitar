@@ -165,8 +165,11 @@ body{
   :root{
     --tableSize: 96vw;
   }
-  html{
-    font-size:14px;
+  /* html{
+    font-size:16px;
+  } */
+  .table-item{
+    font-size: 0.88rem;
   }
   .table-header{
     height: 4rem;
@@ -184,13 +187,19 @@ body{
   }
 }
 
+@media screen and (max-width: 400px){
+  .table-item{
+    font-size: 0.8rem;
+  }
+}
+
 @media screen and (min-width: 475px) and (max-width: 672px){
   :root{
     --tableSize: 96vw;
   }
-  html{
+  /* html{
     font-size:16px;
-  }
+  } */
   .table-header{
     height: 4rem;
     vertical-align: middle;

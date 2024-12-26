@@ -180,24 +180,28 @@ function popTable(objArray){
   }
   for(let i=0; i<objArray.length; i++){
     const titleNode = document.createElement("p");
+    titleNode.classList.add("table-item");
     titleNode.innerHTML = objArray[i].title;
     mainTable.append(titleNode);
     
     const artistNode = document.createElement("p");
+    artistNode.classList.add("table-item");
     artistNode.innerHTML = objArray[i].artist;
     mainTable.append(artistNode);
     
     const totalNode = document.createElement("p");
+    totalNode.classList.add("table-item");
     totalNode.classList.add("times-played-stat");
     totalNode.innerHTML = objArray[i].times_played;
     mainTable.append(totalNode);
     
     const playedNode = document.createElement("p");
+    playedNode.classList.add("table-item");
     playedNode.innerHTML = objArray[i].last_played;
     mainTable.append(playedNode);
     
     const buttonNode = document.createElement("button");
-    buttonNode.classList.add("lyrics-link");
+    buttonNode.classList.add("lyrics-link", "table-item");
     buttonNode.innerHTML = "Lyrics";
     mainTable.append(buttonNode);
     buttonNode.onclick = function(){
