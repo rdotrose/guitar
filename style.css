@@ -107,6 +107,7 @@ body{
 }
 
 #lyric-chord-container{
+  z-index: 3;
   width: 100vw;
   min-height: 100vh;
   padding: 0 calc((100vw/2 - var(--tableSize)/2));
