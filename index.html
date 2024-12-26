@@ -1,1 +1,56 @@
-<p>Hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Guitar Song Database</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+  <div id="page-container">
+    <div id="lyric-chord-container">
+      <div id="chords">
+        <div class="lyric-menu">
+          <h2>Special Chords</h2>
+          <div>
+            <button class="toggle" id="chord-toggle">Clean Lyrics</button>
+            <button class="back">➔</button>
+          </div>
+        </div><!-- end lyric menu -->
+        <div id="chords-insert">
+        </div><!-- end chords insert -->
+      </div><!-- end chords -->
+      <div id="lyrics">
+        <div class="lyric-menu">
+          <h2 id="title-insert"></h2>
+          <div class="autoscroll-menu">
+            <button class="toggle" id="autoscroll-toggle">Autoscroll</button>
+            <br class="query-small">
+            <button class="toggle" id="scroll-minus">-</button>
+            <button class="toggle" id="scroll-plus">+</button>
+          </div>
+        </div><!-- end lyric menu -->
+        <div id="lyrics-insert"></div>
+      </div><!-- end lyrics -->
+      <div class="lyric-menu">
+        <div id="mark-played-container">
+          <button id="mark-played">Mark Played</button>
+          <div id="animation-container"></div>
+        </div>
+        <div>
+          <button class="back">➔</button>
+        </div>
+      </div><!-- end lyric menu -->
+    </div><!-- end lyric chord container -->
+    
+    <div id="primary-container">
+      <h1>Song Database</h1>
+      <div id="main-table">
+      </div><!-- end main table -->
+    </div><!-- end primary container -->
+  </div><!-- end page container -->
+
+  <script src="javascript.js"></script>
+</body>
+</html>
