@@ -27,6 +27,11 @@ body{
   margin: 0 auto;
 }
 
+#guitar-container{
+    width: 6rem;
+    height: 6rem;
+}
+
 #main-table{
   display: grid;
   grid-template-columns: auto auto auto auto auto;
