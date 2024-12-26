@@ -33,6 +33,7 @@ body{
   gap: 1rem;
   max-width: var(--tableSize);
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 #main-table button:hover{

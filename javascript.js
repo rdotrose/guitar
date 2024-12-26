@@ -10,11 +10,15 @@ const scrollPlus = document.getElementById("scroll-plus");
 const scrollMinus = document.getElementById("scroll-minus");
 const markPlayed = document.getElementById("mark-played");
 const animationContainer = document.getElementById("animation-container");
+const showChanges = document.getElementById("show-changes");
+const changes = document.getElementById("changes");
 const date = new Date();
 const timestamp = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
 const dbPath = 'https://rdotrose.github.io/guitar/guitar.db';
+const changeLog = [];
 
 let currentId;
+let currentTitle;
 let sortTitle = false;
 let sortTitleAsc = true;
 let sortArtist = false;
@@ -200,7 +204,7 @@ function popTable(objArray){
       titleInsert.innerHTML = objArray[i].title;
       lyricsInsert.innerHTML = objArray[i].lyrics;
       currentId = objArray[i].id;
-      console.log(currentId);
+      currentTitle = objArray[i].title;
       showLyrics();
       //create button that can update last played
     }
@@ -276,29 +280,45 @@ async function initDatabase() {
 }
 
 async function updateDatabase() {
-  const SQL = await initSqlJs({
-    // locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/${file}`
-    //without arrow notation
-    locateFile: function(file){
-      return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/' + file;
-    }
-  });
+    changeLog.push([currentId, currentTitle, timestamp]);
+    // Saving to the database directly didn't work on GitHub, so I'll have to track changes manually
 
-  const response = await fetch('https://rdotrose.github.io/guitar/guitar.db');
-  const arrayBuffer = await response.arrayBuffer();
-  const uint8Array = new Uint8Array(arrayBuffer);
+    //   const SQL = await initSqlJs({
+    //     // locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/${file}`
+    //     //without arrow notation
+    //     locateFile: function(file){
+    //       return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/' + file;
+    //     }
+    //   });
 
-  const db = new SQL.Database(uint8Array);
-  
-  //update record
-  let updateString = "UPDATE songs SET times_played = times_played + 1, last_played = " + timestamp + "  WHERE id = " + currentId;
-  db.run(updateString);
-  console.log(updateString);
+    //   const response = await fetch('https://rdotrose.github.io/guitar/guitar.db');
+    //   const arrayBuffer = await response.arrayBuffer();
+    //   const uint8Array = new Uint8Array(arrayBuffer);
+
+    //   const db = new SQL.Database(uint8Array);
     
-  // Export the modified database
-  const data = db.export();
-  const buffer = Buffer.from(data);
-  fs.writeFileSync(dbPath, buffer); 
+    //   //update record
+    //   let updateString = "UPDATE songs SET times_played = times_played + 1, last_played = " + timestamp + "  WHERE id = " + currentId;
+    //   db.run(updateString);
+    //   console.log(updateString);
+        
+    //   // Export the modified database
+    //   const data = db.export();
+    //   const buffer = Buffer.from(data);
+    //   fs.writeFileSync(dbPath, buffer); 
+}
+
+function writeChanges(){
+    changes.innerHTML = "";
+    let output = "";
+    for(let i=0; i<changeLog.length; i++){
+        output += `<p>Song ID: ${changeLog[i][0]},    Song Title: ${changeLog[i][1]},    Date: ${changeLog[i][2]}`
+    }
+    changes.innerHTML = output;
+}
+
+showChanges.onclick = function(){
+    writeChanges();
 }
 
 initDatabase();
