@@ -10,6 +10,7 @@ const scrollPlus = document.getElementById("scroll-plus");
 const scrollMinus = document.getElementById("scroll-minus");
 const markPlayed = document.getElementById("mark-played");
 const animationContainer = document.getElementById("animation-container");
+const guitarContainer = document.getElementById("guitar-container");
 const showChanges = document.getElementById("show-changes");
 const changes = document.getElementById("changes");
 const date = new Date();
@@ -321,4 +322,11 @@ showChanges.onclick = function(){
     writeChanges();
 }
 
+const guitarAnimation = lottie.loadAnimation({
+    container: guitarContainer,
+    path: 'https://rdotrose.github.io/guitar/guitarAnimation.json',
+    render: 'svg',
+    loop: true,
+    autoplay: true
+  });
 initDatabase();
