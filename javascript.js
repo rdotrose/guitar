@@ -115,6 +115,7 @@ function autoscroll(){
       if((currentPos + scrollSpeed) > (lyricChordContainer.clientHeight - window.innerHeight)){
         window.scrollTo(0, lyricChordContainer.clientHeight - window.innerHeight);
         // autoscrollToggle.disabled = false;
+        scrollOn = false;
         clearInterval(scrollInterval);
       }
       else{
