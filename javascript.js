@@ -33,7 +33,7 @@ let showChords = false;
 let scrollInterval;
 let scrollOn = false;
 let scrollSpeed = 1;
-let scrollFreq = 51;
+let scrollFreq = 67;
 
 function mapRows(resultSet) {
   const columns = resultSet.columns;
