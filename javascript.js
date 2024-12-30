@@ -20,6 +20,7 @@ const changeLog = [];
 
 let currentId;
 let currentTitle;
+let capoVal = "";
 let sortTitle = false;
 let sortTitleAsc = true;
 let sortArtist = false;
@@ -131,17 +132,21 @@ autoscrollToggle.onclick = function(){
 }
 
 scrollMinus.onclick = function(){
-  if(scrollSpeed > 1){
-    scrollSpeed--;
-    console.log(scrollSpeed);
+  clearInterval(scrollInterval);
+  scrollOn = false;
+  if(scrollFreq < 101){
+    scrollFreq += 17;
   }
+  autoscroll();
 }
 
 scrollPlus.onclick = function(){
-  if(scrollSpeed <= 4){
-    scrollSpeed++;
-    console.log(scrollSpeed);
+  clearInterval(scrollInterval);
+  scrollOn = false;
+  if(scrollFreq > 16){
+    scrollFreq -= 17;
   }
+  autoscroll();
 }
 
 function showCelebrate(){
@@ -206,9 +211,11 @@ function popTable(objArray){
     buttonNode.innerHTML = "Lyrics";
     mainTable.append(buttonNode);
     buttonNode.onclick = function(){
+      capoVal = objArray[i].capo;
       chordsInsert.innerHTML = objArray[i].chords;
       titleInsert.innerHTML = objArray[i].title;
       lyricsInsert.innerHTML = objArray[i].lyrics;
+      lyricsInsert.querySelectorAll("p")[0].innerHTML = "<p> Capo: " + capoVal + "</p>" + lyricsInsert.querySelectorAll("p")[0].innerHTML;
       currentId = objArray[i].id;
       currentTitle = objArray[i].title;
       showLyrics();

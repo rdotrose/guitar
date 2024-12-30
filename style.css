@@ -183,7 +183,7 @@ body{
     display: inline;
   }
   #main-table{
-    gap:0.4rem;
+    gap:1rem 0.4rem;
   }
 }
 
@@ -212,7 +212,7 @@ body{
     display: inline;
   }
   #main-table{
-    gap:0.4rem;
+    gap:1rem 0.4rem;
   }
 }
 
