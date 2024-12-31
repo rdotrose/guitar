@@ -132,21 +132,27 @@ autoscrollToggle.onclick = function(){
 }
 
 scrollMinus.onclick = function(){
-  clearInterval(scrollInterval);
-  scrollOn = false;
-  if(scrollFreq < 101){
+  if(scrollFreq < 84){
     scrollFreq += 17;
   }
-  autoscroll();
+  if(scrollOn){
+    clearInterval(scrollInterval);
+    scrollOn = false;
+    autoscroll();
+  }
+  
 }
 
 scrollPlus.onclick = function(){
-  clearInterval(scrollInterval);
-  scrollOn = false;
   if(scrollFreq > 16){
     scrollFreq -= 17;
   }
-  autoscroll();
+  if(scrollOn){
+    clearInterval(scrollInterval);
+    scrollOn = false; 
+    autoscroll();
+  }
+  
 }
 
 function showCelebrate(){
