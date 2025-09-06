@@ -15,7 +15,6 @@ const showChanges = document.getElementById("show-changes");
 const changes = document.getElementById("changes");
 const date = new Date();
 const timestamp = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-const dbPath = 'https://rdotrose.github.io/guitar/guitar.db';
 const changeLog = [];
 
 let currentId;
