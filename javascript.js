@@ -230,76 +230,124 @@ function popTable(objArray){
   }
 }
 
-
-//function must be asynchronous
+//new initDatabase function
 async function initDatabase() {
-  const SQL = await initSqlJs({
-    // locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
-    //without arrow notation
-    locateFile: function(file){
-      return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/' + file;
-    }
-  });
+  let sortParam = 'title';
+  let direction = 'asc';
 
-  const response = await fetch(dbPath);
-  const arrayBuffer = await response.arrayBuffer();
-  const uint8Array = new Uint8Array(arrayBuffer);
-
-  const db = new SQL.Database(uint8Array);
-  
-
-  // Query
-  //the res variable doesn't seem to exist outside of the if statement. That's why the repeated code
-  //it's a javascript scope thing... repeated code vs using let for 'res' above the if block
-  let res;
-  if(sortTitle){
-    if(sortTitleAsc){
-      res = db.exec("SELECT * FROM songs ORDER BY title, artist, times_played DESC, last_played DESC");
-    }
-    else{
-      res = db.exec("SELECT * FROM songs ORDER BY title DESC, artist, times_played DESC, last_played DESC");
-    }
+  if (sortTitle) {
+    sortParam = 'title';
+    direction = sortTitleAsc ? 'asc' : 'desc';
     sortTitleAsc = !sortTitleAsc;
-  }
-  else if(sortArtist){
-    if(sortArtistAsc){
-      res = db.exec("SELECT * FROM songs ORDER BY artist, title, times_played DESC, last_played DESC");
-    }
-    else{
-      res = db.exec("SELECT * FROM songs ORDER BY artist DESC, title, times_played DESC, last_played DESC");
-    }
+  } else if (sortArtist) {
+    sortParam = 'artist';
+    direction = sortArtistAsc ? 'asc' : 'desc';
     sortArtistAsc = !sortArtistAsc;
-  }
-  else if(sortTotal){
-    if(sortTotalDesc){
-      res = db.exec("SELECT * FROM songs ORDER BY times_played DESC, title, artist, last_played DESC");
-    }
-    else{
-      res = db.exec("SELECT * FROM songs ORDER BY times_played, title, artist, last_played DESC");
-    }
+  } else if (sortTotal) {
+    sortParam = 'times_played';
+    direction = sortTotalDesc ? 'desc' : 'asc';
     sortTotalDesc = !sortTotalDesc;
-  }
-  else{
-    if(sortTimeDesc){
-      res = db.exec("SELECT * FROM songs ORDER BY last_played DESC, title, artist, times_played DESC");
-    }
-    else{
-      res = db.exec("SELECT * FROM songs ORDER BY last_played, title, artist, times_played DESC");
-    }
+  } else {
+    sortParam = 'last_played';
+    direction = sortTimeDesc ? 'desc' : 'asc';
     sortTimeDesc = !sortTimeDesc;
   }
-  
-  const rows = mapRows(res[0]);
-  popTable(rows);
-  
+
+  const response = await fetch(`/api/songs?sort=${sortParam}&direction=${direction}`);
+  const songs = await response.json();
+  popTable(songs);
+
   sortTitle = false;
   sortArtist = false;
   sortTime = false;
   sortTotal = false;
 }
 
+//New Update method
 async function updateDatabase() {
-    changeLog.push([currentId, currentTitle, timestamp]);
+  try {
+    await fetch('/api/mark-played', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: currentId })
+    });
+    console.log(`Marked song ${currentTitle} as played.`);
+  } catch (error) {
+    console.error('Error updating song:', error);
+  }
+}
+
+
+//function must be asynchronous
+//OLD VERSION
+// async function initDatabase() {
+//   const SQL = await initSqlJs({
+//     // locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
+//     //without arrow notation
+//     locateFile: function(file){
+//       return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/' + file;
+//     }
+//   });
+
+//   const response = await fetch(dbPath);
+//   const arrayBuffer = await response.arrayBuffer();
+//   const uint8Array = new Uint8Array(arrayBuffer);
+
+//   const db = new SQL.Database(uint8Array);
+  
+
+//   // Query
+//   //the res variable doesn't seem to exist outside of the if statement. That's why the repeated code
+//   //it's a javascript scope thing... repeated code vs using let for 'res' above the if block
+//   let res;
+//   if(sortTitle){
+//     if(sortTitleAsc){
+//       res = db.exec("SELECT * FROM songs ORDER BY title, artist, times_played DESC, last_played DESC");
+//     }
+//     else{
+//       res = db.exec("SELECT * FROM songs ORDER BY title DESC, artist, times_played DESC, last_played DESC");
+//     }
+//     sortTitleAsc = !sortTitleAsc;
+//   }
+//   else if(sortArtist){
+//     if(sortArtistAsc){
+//       res = db.exec("SELECT * FROM songs ORDER BY artist, title, times_played DESC, last_played DESC");
+//     }
+//     else{
+//       res = db.exec("SELECT * FROM songs ORDER BY artist DESC, title, times_played DESC, last_played DESC");
+//     }
+//     sortArtistAsc = !sortArtistAsc;
+//   }
+//   else if(sortTotal){
+//     if(sortTotalDesc){
+//       res = db.exec("SELECT * FROM songs ORDER BY times_played DESC, title, artist, last_played DESC");
+//     }
+//     else{
+//       res = db.exec("SELECT * FROM songs ORDER BY times_played, title, artist, last_played DESC");
+//     }
+//     sortTotalDesc = !sortTotalDesc;
+//   }
+//   else{
+//     if(sortTimeDesc){
+//       res = db.exec("SELECT * FROM songs ORDER BY last_played DESC, title, artist, times_played DESC");
+//     }
+//     else{
+//       res = db.exec("SELECT * FROM songs ORDER BY last_played, title, artist, times_played DESC");
+//     }
+//     sortTimeDesc = !sortTimeDesc;
+//   }
+  
+//   const rows = mapRows(res[0]);
+//   popTable(rows);
+  
+//   sortTitle = false;
+//   sortArtist = false;
+//   sortTime = false;
+//   sortTotal = false;
+// }
+
+// async function updateDatabase() {
+//     changeLog.push([currentId, currentTitle, timestamp]);
     // Saving to the database directly didn't work on GitHub, so I'll have to track changes manually
 
     //   const SQL = await initSqlJs({
@@ -325,7 +373,7 @@ async function updateDatabase() {
     //   const data = db.export();
     //   const buffer = Buffer.from(data);
     //   fs.writeFileSync(dbPath, buffer); 
-}
+// }
 
 function writeChanges(){
     changes.innerHTML = "";

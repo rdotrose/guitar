@@ -3,3 +3,4 @@ exportedGuitarDB.sql
 postgres_chunk_1.sql
 guitar.db
 node_modules
+.env
