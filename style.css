@@ -8,7 +8,7 @@
   --medBG: #454545;
   --tableSize: 42rem;
   --lightBG: #f0f0f0;
-  --medFont: #454545;
+  --medFont: #454545;  
 }
 
 *{
@@ -77,6 +77,13 @@ body{
 .lyrics-link:hover{
   background: var(--medBG) !important;
   color: var(--lightFont);
+}
+
+.page-link{
+  text-align:center;
+  padding: 0.5rem 1rem;
+  background: var(--lightBG);
+  border: 1px solid var(--darkBG);
 }
 
 .times-played-stat{
