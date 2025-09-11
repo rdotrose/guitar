@@ -104,7 +104,7 @@ searchItem.onclick = function(){
   document.getElementById('search-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const id = Number(document.getElementById('id').value.trim());
+    const id = document.getElementById('id').value.trim();
     const title = document.getElementById('title').value.trim();
 
     let searchParams = {
@@ -119,8 +119,6 @@ searchItem.onclick = function(){
       alert('Please enter an ID or Title to search.');
       return;
     }
-
-    console.log(searchParams);
 
     try {
       const response = await fetch('/api/crud', {
