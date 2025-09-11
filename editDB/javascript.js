@@ -168,17 +168,21 @@ editItem.onclick = function(){
     </form>
     <form id="edit-form">
       <label for="edit-id">ID</label>
-      <input type="text" id="edit-id" name="edit-id">
+      <input type="text" id="edit-id" name="edit-id" required>
       <label for="edit-title">Title</label>
       <input type="text" id="edit-title" name="edit-title" required>
       <label for="edit-artist">Artist</label>
       <input type="text" id="edit-artist" name="edit-artist"required>
       <label for="edit-capo">Capo</label>
-      <input type="text" name="edit-capo" id="edit-capo">
+      <input type="text" name="edit-capo" id="edit-capo" required>
       <label for="edit-chords">Chords</label>
       <textarea name="edit-chords" id="edit-chords" required></textarea>
       <label for="edit-lyrics">Lyrics</label>
       <textarea name="edit-lyrics" id="edit-lyrics" required></textarea>
+      <label for="edit-times-played">ID</label>
+      <input type="text" id="edit-times-played" name="edit-times-played" required>
+      <label for="edit-last-played">Title</label>
+      <input type="text" id="edit-last-played" name="edit-last-played" required>
       <input type="submit" id="save" class="lyrics-link" value="Save">
     </form>
   `;
@@ -207,9 +211,11 @@ editItem.onclick = function(){
         document.getElementById('edit-id').value = result.song.id;
         document.getElementById('edit-title').value = result.song.title;
         document.getElementById('edit-artist').value = result.song.artist;
-        document.getElementById('edit-capo').value = result.song.capo || 'None';
-        document.getElementById('edit-chords').value = result.song.chords || '';
-        document.getElementById('edit-lyrics').value = result.song.lyrics || '';
+        document.getElementById('edit-capo').value = result.song.capo;
+        document.getElementById('edit-chords').value = result.song.chords;
+        document.getElementById('edit-lyrics').value = result.song.lyrics;
+        document.getElementById('edit-times-played').value = result.song.times_played;
+        document.getElementById('edit-last-played').value = result.song.last_played;
       } else {
         alert('Song not found.');
       }
@@ -230,7 +236,9 @@ editItem.onclick = function(){
       artist: document.getElementById('edit-artist').value,
       capo: document.getElementById('edit-capo').value,
       chords: document.getElementById('edit-chords').value,
-      lyrics: document.getElementById('edit-lyrics').value
+      lyrics: document.getElementById('edit-lyrics').value,
+      times_played: document.getElementById('edit-times-played').value,
+      last_played: document.getElementById('edit-last-played').value
     };
 
     try {

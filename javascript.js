@@ -33,7 +33,7 @@ let showChords = false;
 let scrollInterval;
 let scrollOn = false;
 let scrollSpeed = 1;
-let scrollFreq = 67;
+let scrollFreq = 118;
 
 function mapRows(resultSet) {
   const columns = resultSet.columns;
@@ -131,7 +131,7 @@ autoscrollToggle.onclick = function(){
 }
 
 scrollMinus.onclick = function(){
-  if(scrollFreq < 84){
+  if(scrollFreq < 152){
     scrollFreq += 17;
   }
   if(scrollOn){
