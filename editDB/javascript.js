@@ -52,7 +52,7 @@ newItem.onclick = function(){
     };
     
     
-try {
+    try {
       const response = await fetch('/api/crud', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
