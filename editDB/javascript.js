@@ -3,6 +3,42 @@ const searchItem = document.getElementById("search-item");
 const editItem = document.getElementById("edit-item");
 const formSpace = document.getElementById("form-space");
 
+async function checkPassword() {
+  const userPassword = prompt("Enter password to access this page:");
+
+  if (!userPassword) {
+    window.location.href = "/index.html";
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/crud", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "auth",
+        password: userPassword
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      alert("Incorrect password. Redirecting...");
+      window.location.href = "/index.html";
+    } else {
+      // Optionally store password in sessionStorage for later use
+      // sessionStorage.setItem("adminPassword", userPassword);
+    }
+  } catch (err) {
+    console.error("Auth failed:", err);
+    window.location.href = "/index.html";
+  }
+}
+
+checkPassword();
+
+
 newItem.onclick = function(){
   formSpace.style.background = "#FFFFFF";
   newItem.style.borderBottom = "1px solid #FFFFFF"
@@ -179,9 +215,9 @@ editItem.onclick = function(){
       <textarea name="edit-chords" id="edit-chords" required></textarea>
       <label for="edit-lyrics">Lyrics</label>
       <textarea name="edit-lyrics" id="edit-lyrics" required></textarea>
-      <label for="edit-times-played">ID</label>
+      <label for="edit-times-played">Times Played</label>
       <input type="text" id="edit-times-played" name="edit-times-played" required>
-      <label for="edit-last-played">Title</label>
+      <label for="edit-last-played">Last Played</label>
       <input type="text" id="edit-last-played" name="edit-last-played" required>
       <input type="submit" id="save" class="lyrics-link" value="Save">
     </form>
