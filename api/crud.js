@@ -45,6 +45,20 @@ export default async function handler(req, res) {
     }
   }
 
+  if (action === 'update') {
+    try {
+      await pool.query(
+        'UPDATE songs SET title = $1, artist = $2, capo = $3, chords = $4, lyrics = $5 WHERE id = $6',
+        [title, artist, capo, chords, lyrics, id]
+      );
+      return res.status(200).json({ message: 'Song updated successfully!' });
+    } catch (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+  }
+
+
 
   return res.status(400).json({ error: 'Invalid action' });
 }

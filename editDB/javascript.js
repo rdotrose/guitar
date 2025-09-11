@@ -8,6 +8,9 @@ newItem.onclick = function(){
   newItem.style.borderBottom = "1px solid #FFFFFF"
   searchItem.style.borderBottom = "1px solid var(--darkFont)"
   editItem.style.borderBottom = "1px solid var(--darkFont)"
+  newItem.style.zIndex = 2;
+  searchItem.style.zIndex = 0;
+  editItem.style.zIndex = 0;
   
   formSpace.innerHTML = `
   <form id="new-form">
@@ -80,11 +83,15 @@ searchItem.onclick = function(){
   searchItem.style.borderBottom = "1px solid var(--lightBG)"
   newItem.style.borderBottom = "1px solid var(--darkFont)"
   editItem.style.borderBottom = "1px solid var(--darkFont)"
+  newItem.style.zIndex = 0;
+  searchItem.style.zIndex = 2;
+  editItem.style.zIndex = 0;
+
   
   formSpace.innerHTML = `
   <form id="search-form">
       <label for="id">ID</label>
-      <input type="text" id="id" name="title">
+      <input type="text" id="id" name="id">
       <input type="submit" class="lyrics-link" id="search-id" value="Search">
       <label for="title">title</label>
       <input type="text" id="title" name="title">
@@ -149,4 +156,114 @@ editItem.onclick = function(){
   editItem.style.borderBottom = "1px solid var(--lightBG2)"
   newItem.style.borderBottom = "1px solid var(--darkFont)"
   searchItem.style.borderBottom = "1px solid var(--darkFont)"
+  newItem.style.zIndex = 0;
+  searchItem.style.zIndex = 0;
+  editItem.style.zIndex = 2;
+  
+  formSpace.innerHTML = `
+  <form id="edit-search">
+      <label for="id">ID</label>
+      <input type="text" id="id" name="id" required>
+      <input type="submit" class="lyrics-link" id="search-id" value="Search">
+    </form>
+    <form id="edit-form">
+      <label for="edit-id">ID</label>
+      <input type="text" id="edit-id" name="edit-id">
+      <label for="edit-title">Title</label>
+      <input type="text" id="edit-title" name="edit-title" required>
+      <label for="edit-artist">Artist</label>
+      <input type="text" id="edit-artist" name="edit-artist"required>
+      <label for="edit-capo">Capo</label>
+      <select name="edit-capo" id="edit-capo">
+        <option value="None">None</option>
+        <option value="1st Fret">1st Fret</option>
+        <option value="2nd Fret">2nd Fret</option>
+        <option value="3rd Fret">3rd Fret</option>
+        <option value="4th Fret">4th Fret</option>
+        <option value="5th Fret">5th Fret</option>
+        <option value="6th Fret">6th Fret</option>
+        <option value="7th Fret">7th Fret</option>
+        <option value="8th Fret">8th Fret</option>
+        <option value="9th Fret">9th Fret</option>
+        <option value="10th Fret">10th Fret</option>
+      </select>
+      <label for="edit-chords">Chords</label>
+      <textarea name="edit-chords" id="edit-chords" required></textarea>
+      <label for="edit-lyrics">Lyrics</label>
+      <textarea name="edit-lyrics" id="edit-lyrics" required></textarea>
+      <input type="submit" id="save" class="lyrics-link" value="Save">
+    </form>
+  `;
+  
+  
+  document.getElementById('edit-search').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const id = Number(document.getElementById('id').value.trim());
+
+    if (!id) {
+      alert('Please enter a valid ID.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/crud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'read', id })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.song) {
+        document.getElementById('edit-id').value = result.song.id;
+        document.getElementById('edit-title').value = result.song.title;
+        document.getElementById('edit-artist').value = result.song.artist;
+        document.getElementById('edit-capo').value = result.song.capo || 'None';
+        document.getElementById('edit-chords').value = result.song.chords || '';
+        document.getElementById('edit-lyrics').value = result.song.lyrics || '';
+      } else {
+        alert('Song not found.');
+      }
+    } catch (err) {
+      console.error('Search failed:', err);
+      alert('Something went wrong.');
+    }
+  });
+  
+  
+  document.getElementById('edit-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const data = {
+      action: 'update',
+      id: Number(document.getElementById('edit-id').value),
+      title: document.getElementById('edit-title').value,
+      artist: document.getElementById('edit-artist').value,
+      capo: document.getElementById('edit-capo').value,
+      chords: document.getElementById('edit-chords').value,
+      lyrics: document.getElementById('edit-lyrics').value
+    };
+
+    try {
+      const response = await fetch('/api/crud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Song updated successfully!');
+      } else {
+        alert('Update failed: ' + result.error);
+      }
+    } catch (err) {
+      console.error('Update failed:', err);
+      alert('Something went wrong.');
+    }
+  });
+
+
 }
