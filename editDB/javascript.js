@@ -80,6 +80,68 @@ searchItem.onclick = function(){
   searchItem.style.borderBottom = "1px solid var(--lightBG)"
   newItem.style.borderBottom = "1px solid var(--darkFont)"
   editItem.style.borderBottom = "1px solid var(--darkFont)"
+  
+  formSpace.innerHTML = `
+  <form id="search-form">
+      <label for="id">ID</label>
+      <input type="text" id="id" name="title">
+      <input type="submit" class="lyrics-link" id="search-id" value="Search">
+      <label for="title">title</label>
+      <input type="text" id="title" name="title">
+      <input type="submit" class="lyrics-link" id="search-title" value="Search">
+    </form>
+    <div id="search-results">
+      <label for="id-result">ID</label>
+      <input type="text" id="id-result" name="id-result">
+      <label for="title-result">Title</label>
+      <input type="text" id="title-result" name="title-result">
+      <label for="artist-result">Artist</label>
+      <input type="text" id="artist-result" name="artist-result">
+    </div>
+  `;
+  
+  
+  document.getElementById('search-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const id = document.getElementById('id').value.trim();
+    const title = document.getElementById('title').value.trim();
+
+    let searchParams = {
+      action: 'read'
+    };
+
+    if (id) {
+      searchParams.id = id;
+    } else if (title) {
+      searchParams.title = title;
+    } else {
+      alert('Please enter an ID or Title to search.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/crud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(searchParams)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.song) {
+        document.getElementById('id-result').value = result.song.id;
+        document.getElementById('title-result').value = result.song.title;
+        document.getElementById('artist-result').value = result.song.artist;
+      } else {
+        alert('Song not found.');
+      }
+    } catch (err) {
+      console.error('Search failed:', err);
+      alert('Something went wrong.');
+    }
+  });
+
 }
 
 editItem.onclick = function(){
