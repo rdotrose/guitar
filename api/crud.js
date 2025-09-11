@@ -29,9 +29,9 @@ export default async function handler(req, res) {
     try {
       let result;
       if (id) {
-        result = await pool.query('SELECT id, title, artist FROM songs WHERE id = $1', [id]);
+        result = await pool.query('SELECT * FROM songs WHERE id = $1', [id]);
       } else if (title) {
-        result = await pool.query('SELECT id, title, artist FROM songs WHERE title ILIKE $1 LIMIT 1', [`%${title}%`]);
+        result = await pool.query('SELECT * FROM songs WHERE title ILIKE $1 LIMIT 1', [`%${title}%`]);
       }
 
       if (result.rows.length === 0) {

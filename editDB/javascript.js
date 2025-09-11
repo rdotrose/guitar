@@ -174,19 +174,7 @@ editItem.onclick = function(){
       <label for="edit-artist">Artist</label>
       <input type="text" id="edit-artist" name="edit-artist"required>
       <label for="edit-capo">Capo</label>
-      <select name="edit-capo" id="edit-capo">
-        <option value="None">None</option>
-        <option value="1st Fret">1st Fret</option>
-        <option value="2nd Fret">2nd Fret</option>
-        <option value="3rd Fret">3rd Fret</option>
-        <option value="4th Fret">4th Fret</option>
-        <option value="5th Fret">5th Fret</option>
-        <option value="6th Fret">6th Fret</option>
-        <option value="7th Fret">7th Fret</option>
-        <option value="8th Fret">8th Fret</option>
-        <option value="9th Fret">9th Fret</option>
-        <option value="10th Fret">10th Fret</option>
-      </select>
+      <input type="text" name="edit-capo" id="edit-capo">
       <label for="edit-chords">Chords</label>
       <textarea name="edit-chords" id="edit-chords" required></textarea>
       <label for="edit-lyrics">Lyrics</label>
