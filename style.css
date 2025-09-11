@@ -85,6 +85,7 @@ body{
   padding: 0.5rem 1rem;
   background: var(--lightBG);
   border: 1px solid var(--darkBG);
+  text-decoration: none;
 }
 
 .times-played-stat{
@@ -260,6 +261,12 @@ input, textarea, select{
   margin: 0 auto;
   padding: 0.5rem 1rem;
   cursor: pointer;
+}
+
+#search-id, #search-title{
+  justify-self: start;
+  padding: 0.5rem 1rem;
+  width: auto;
 }
 
 @media screen and (max-width: 400px){
