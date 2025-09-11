@@ -8,6 +8,7 @@
   --medBG: #454545;
   --tableSize: 42rem;
   --lightBG: #f0f0f0;
+  --lightBG2: #d0d0d0;
   --medFont: #454545;  
 }
 
@@ -192,6 +193,73 @@ body{
   #main-table{
     gap:1rem 0.4rem;
   }
+}
+
+#edit-options{
+  display: flex;
+  gap:2px;
+  background: #FFFFFF;
+  width: 8.15rem;
+}
+
+.option-button{
+  border: 1px solid var(--darkFont);
+  border-bottom: 1px solid var(--darkFont);
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  z-index:2;
+}
+
+#new-item{
+  background: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+#search-item{
+  background: var(--lightBG);
+}
+
+#edit-item{
+  background: var(--lightBG2);
+}
+
+#form-space{
+  width:100%;
+  min-height: 15rem;
+  border: 1px solid var(--darkFont);
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  transition: all 0.5s ease-in-out;
+  padding: 2rem;
+  margin-bottom: 5rem;
+}
+
+input, textarea, select{
+  display:block;
+  margin-bottom: 1rem;
+  width:100%;
+}
+
+#chords{
+  min-height: 6rem;
+}
+
+#lyrics{
+  min-height: 10rem;
+}
+
+#save{
+  display:block;
+  text-align:center;
+  width: 10rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 400px){
