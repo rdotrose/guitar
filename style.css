@@ -237,7 +237,7 @@ body{
   border-top-left-radius: 0px;
   transition: all 0.2s ease-in-out;
   padding: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   position:relative;
   z-index:1;
 }
