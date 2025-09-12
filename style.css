@@ -25,7 +25,7 @@ body{
 
 #page-container{
   width: var(--tableSize);
-  margin: 0 auto;
+  margin: 0 auto 3rem auto;
 }
 
 #guitar-container{
