@@ -181,6 +181,7 @@ function popTable(objArray){
     sortArtist = false;
     sortTime = false;
     sortTotal = false;
+    sortTitleAsc = !sortTitleAsc;
     initDatabase();
   }
   document.getElementById("artist-button").onclick = function(){
@@ -188,6 +189,7 @@ function popTable(objArray){
     sortTime = false;
     sortTotal = false;
     sortTitle = false;
+    sortArtistAsc = !sortArtistAsc;
     initDatabase();
   }
   document.getElementById("total-button").onclick = function(){
@@ -195,6 +197,7 @@ function popTable(objArray){
     sortTitle = false;
     sortArtist = false;
     sortTime = false;
+    sortTotalDesc = !sortTotalDesc;
     initDatabase();
   }
   document.getElementById("time-button").onclick = function(){
@@ -202,6 +205,7 @@ function popTable(objArray){
     sortTotal = false;
     sortTitle = false;
     sortArtist = false;
+    sortTimeDesc = !sortTimeDesc;
     initDatabase();
   }
   for(let i=0; i<objArray.length; i++){
@@ -245,8 +249,7 @@ function popTable(objArray){
 }
 
 //new initDatabase function
-async function initDatabase(refreshOnly = false) {
-  console.log(sortTitle);
+async function initDatabase() {
   let sortParam = 'title';
   let direction = 'asc';
 
@@ -254,28 +257,15 @@ async function initDatabase(refreshOnly = false) {
     console.log(sortTitleAsc, refreshOnly);
     sortParam = 'title';
     direction = sortTitleAsc ? 'asc' : 'desc';
-    if(!refreshOnly){
-      sortTitleAsc = !sortTitleAsc;
-    }
-    console.log(sortTitleAsc, refreshOnly);
   } else if (sortArtist) {
     sortParam = 'artist';
     direction = sortArtistAsc ? 'asc' : 'desc';
-    if(!refreshOnly){
-      sortArtistAsc = !sortArtistAsc;
-    }
   } else if (sortTotal) {
     sortParam = 'times_played';
     direction = sortTotalDesc ? 'desc' : 'asc';
-    if(!refreshOnly){
-      sortTotalDesc = !sortTotalDesc;
-    }
   } else {
     sortParam = 'last_played';
     direction = sortTimeDesc ? 'desc' : 'asc';
-    if(!refreshOnly){
-      sortTimeDesc = !sortTimeDesc;
-    }
   }
 
   const response = await fetch(`/api/songs?sort=${sortParam}&direction=${direction}`);
