@@ -169,6 +169,7 @@ function showCelebrate(){
 markPlayed.onclick = function(){
   showCelebrate();
   updateDatabase();
+  popTable();
 }
 
 function popTable(objArray){
