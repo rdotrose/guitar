@@ -248,6 +248,7 @@ async function initDatabase() {
     direction = sortTotalDesc ? 'desc' : 'asc';
     sortTotalDesc = !sortTotalDesc;
   } else {
+    console.log("Sorted by last played");
     sortParam = 'last_played';
     direction = sortTimeDesc ? 'desc' : 'asc';
     sortTimeDesc = !sortTimeDesc;
