@@ -246,6 +246,7 @@ function popTable(objArray){
 
 //new initDatabase function
 async function initDatabase(refreshOnly = false) {
+  console.log(sortTitle);
   let sortParam = 'title';
   let direction = 'asc';
 
