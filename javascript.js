@@ -169,7 +169,9 @@ function showCelebrate(){
 markPlayed.onclick = function(){
   showCelebrate();
   updateDatabase();
-  initDatabase();
+  setTimeout(function(){
+    initDatabase(true);
+  }, 500)
 }
 
 function popTable(objArray){
@@ -243,26 +245,34 @@ function popTable(objArray){
 }
 
 //new initDatabase function
-async function initDatabase() {
+async function initDatabase(refreshOnly = false) {
   let sortParam = 'title';
   let direction = 'asc';
 
   if (sortTitle) {
     sortParam = 'title';
     direction = sortTitleAsc ? 'asc' : 'desc';
-    sortTitleAsc = !sortTitleAsc;
+    if(!refreshOnly){
+      sortTitleAsc = !sortTitleAsc;
+    }
   } else if (sortArtist) {
     sortParam = 'artist';
     direction = sortArtistAsc ? 'asc' : 'desc';
-    sortArtistAsc = !sortArtistAsc;
+    if(!refreshOnly){
+      sortArtistAsc = !sortArtistAsc;
+    }
   } else if (sortTotal) {
     sortParam = 'times_played';
     direction = sortTotalDesc ? 'desc' : 'asc';
-    sortTotalDesc = !sortTotalDesc;
+    if(!refreshOnly){
+      sortTotalDesc = !sortTotalDesc;
+    }
   } else {
     sortParam = 'last_played';
     direction = sortTimeDesc ? 'desc' : 'asc';
-    sortTimeDesc = !sortTimeDesc;
+    if(!refreshOnly){
+      sortTimeDesc = !sortTimeDesc;
+    }
   }
 
   const response = await fetch(`/api/songs?sort=${sortParam}&direction=${direction}`);
