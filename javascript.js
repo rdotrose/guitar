@@ -251,11 +251,13 @@ async function initDatabase(refreshOnly = false) {
   let direction = 'asc';
 
   if (sortTitle) {
+    console.log(sortTitleAsc, refreshOnly);
     sortParam = 'title';
     direction = sortTitleAsc ? 'asc' : 'desc';
     if(!refreshOnly){
       sortTitleAsc = !sortTitleAsc;
     }
+    console.log(sortTitleAsc, refreshOnly);
   } else if (sortArtist) {
     sortParam = 'artist';
     direction = sortArtistAsc ? 'asc' : 'desc';
