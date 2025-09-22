@@ -20,11 +20,11 @@ const changeLog = [];
 let currentId;
 let currentTitle;
 let capoVal = "";
-let sortTitle = false;
+let sortTitle = true;
 let sortTitleAsc = true;
 let sortArtist = false;
 let sortArtistAsc = true;
-let sortTime = true;
+let sortTime = false;
 let sortTimeDesc = true;
 let sortTotal = false;
 let sortTotalDesc = true;
@@ -176,18 +176,30 @@ function popTable(objArray){
   mainTable.innerHTML = '<button id="title-button" class="table-header">Title</button><button id="artist-button" class="table-header">Artist</button><button id="total-button" class="table-header">Times Played</button><button id="time-button" class="table-header">Last Played</button><p class="table-header">Lyrics <br class="query-small">Link</p>';
   document.getElementById("title-button").onclick = function(){
     sortTitle = true;
+    sortArtist = false;
+    sortTime = false;
+    sortTotal = false;
     initDatabase();
   }
   document.getElementById("artist-button").onclick = function(){
     sortArtist = true;
+    sortTime = false;
+    sortTotal = false;
+    sortTitle = false;
     initDatabase();
   }
   document.getElementById("total-button").onclick = function(){
     sortTotal = true;
+    sortTitle = false;
+    sortArtist = false;
+    sortTime = false;
     initDatabase();
   }
   document.getElementById("time-button").onclick = function(){
     sortTime = true;
+    sortTotal = false;
+    sortTitle = false;
+    sortArtist = false;
     initDatabase();
   }
   for(let i=0; i<objArray.length; i++){
@@ -248,7 +260,6 @@ async function initDatabase() {
     direction = sortTotalDesc ? 'desc' : 'asc';
     sortTotalDesc = !sortTotalDesc;
   } else {
-    console.log("Sorted by last played");
     sortParam = 'last_played';
     direction = sortTimeDesc ? 'desc' : 'asc';
     sortTimeDesc = !sortTimeDesc;
@@ -257,11 +268,6 @@ async function initDatabase() {
   const response = await fetch(`/api/songs?sort=${sortParam}&direction=${direction}`);
   const songs = await response.json();
   popTable(songs);
-
-  sortTitle = false;
-  sortArtist = false;
-  sortTime = false;
-  sortTotal = false;
 }
 
 //New Update method
