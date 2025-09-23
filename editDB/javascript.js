@@ -12,11 +12,26 @@ function showModal(displayText){
 
 function clearModal(){
   modal.style.opacity = 0;
-  modal.innerHTML = "";
+  setTimeout(function(){
+    modal.innerHTML = "";
+    modal.style.pointerEvents = "none";
+  }, 1000);
 }
 
-async function checkPassword() {
-  const userPassword = prompt("Enter password to access this page:");
+function createPasswordListener(){
+  showModal(
+    `
+    <p>Please enter your password</p>
+    <input id="user-password" type="password" autocomplete="off">
+    <button id="password-submit">Submit</button>
+    `);
+  document.getElementById("password-submit").onclick = function(){
+    let password = document.getElementById("user-password").value.trim();
+    checkPassword(password);
+  }
+}
+
+async function checkPassword(userPassword) {
 
   if (!userPassword) {
     window.location.href = "/index.html";
@@ -38,9 +53,10 @@ async function checkPassword() {
     if (!response.ok || !result.success) {
       showModal("<p>Incorrect password. Redirecting...</p>")
       window.location.href = "/index.html";
+      clearModal();
     } else {
-      // Optionally store password in sessionStorage for later use
-      // sessionStorage.setItem("adminPassword", userPassword);
+      //store password in sessionStorage for later use
+      sessionStorage.setItem("adminPassword", userPassword);
     }
   } catch (err) {
     console.error("Auth failed:", err);
@@ -48,7 +64,7 @@ async function checkPassword() {
   }
 }
 
-checkPassword();
+createPasswordListener();
 
 
 newItem.onclick = function(){
