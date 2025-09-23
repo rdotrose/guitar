@@ -254,7 +254,6 @@ async function initDatabase() {
   let direction = 'asc';
 
   if (sortTitle) {
-    console.log(sortTitleAsc, refreshOnly);
     sortParam = 'title';
     direction = sortTitleAsc ? 'asc' : 'desc';
   } else if (sortArtist) {
