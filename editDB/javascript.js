@@ -36,7 +36,7 @@ async function checkPassword() {
     const result = await response.json();
 
     if (!response.ok || !result.success) {
-      showModal("Incorrect password. Redirecting...")
+      showModal("<p>Incorrect password. Redirecting...</p>")
       window.location.href = "/index.html";
     } else {
       // Optionally store password in sessionStorage for later use
@@ -114,16 +114,16 @@ newItem.onclick = function(){
       console.log(result);
 
       if (response.ok) {
-        showModal('Song saved successfully!');
+        showModal('<p>Song saved successfully!</p>');
         setTimeout(clearModal, 1500);
         e.target.reset(); // Clear the form
       } else {
-        showModal('Error: ' + result.error);
+        showModal('<p>Error: ' + result.error + '</p>');
         setTimeout(clearModal, 1500);
       }
     } catch (err) {
       console.error('Request failed:', err);
-      showModal('Error: ' + result.error);
+      showModal('<p>Error: ' + result.error + '</p>');
       setTimeout(clearModal, 1500);
     }
   });
@@ -174,7 +174,7 @@ searchItem.onclick = function(){
     } else if (title) {
       searchParams.title = title;
     } else {
-      showModal('Please enter an ID or Title to search.');
+      showModal('<p>Please enter an ID or Title to search.</p>');
       setTimeout(clearModal, 1500);
       return;
     }
@@ -193,12 +193,12 @@ searchItem.onclick = function(){
         document.getElementById('title-result').value = result.song.title;
         document.getElementById('artist-result').value = result.song.artist;
       } else {
-        showModal('Song not found');
+        showModal('<p>Song not found</p>');
         setTimeout(clearModal, 1500);
       }
     } catch (err) {
       console.error('Search failed:', err);
-      showModal('Something went wrong');
+      showModal('<p>Something went wrong</p>');
       setTimeout(clearModal, 1500);
     }
   });
@@ -248,7 +248,7 @@ editItem.onclick = function(){
     const id = Number(document.getElementById('id').value.trim());
 
     if (!id) {
-      showModal('Please enter a valid ID');
+      showModal('<p>Please enter a valid ID</p>');
       setTimeout(clearModal, 1500);
       return;
     }
@@ -272,12 +272,12 @@ editItem.onclick = function(){
         document.getElementById('edit-times-played').value = result.song.times_played;
         document.getElementById('edit-last-played').value = result.song.last_played;
       } else {
-        showModal('Song not found');
+        showModal('<p>Song not found</p>');
         setTimeout(clearModal, 1500);
       }
     } catch (err) {
       console.error('Search failed:', err);
-      showModal('Something went wrong');
+      showModal('<p>Something went wrong</p>');
       setTimeout(clearModal, 1500);
     }
   });
@@ -308,15 +308,15 @@ editItem.onclick = function(){
       const result = await response.json();
 
       if (response.ok) {
-        showModal('Song updated successfully!');
+        showModal('<p>Song updated successfully!</p>');
         setTimeout(clearModal, 1500);
       } else {
-        showModal('Update failed: ' + result.error);
+        showModal('<p>Update failed: ' + result.error + '</p>');
         setTimeout(clearModal, 1500);
       }
     } catch (err) {
       console.error('Update failed:', err);
-      showModal('Something went wrong');
+      showModal('<p>Something went wrong</p>');
       setTimeout(clearModal, 1500);
     }
   });
