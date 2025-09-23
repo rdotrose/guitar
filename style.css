@@ -271,6 +271,30 @@ input, textarea, select{
   width: auto;
 }
 
+#modal{
+  position: fixed;
+  width: 20rem;
+  background: var(--medBG);
+  border-radius: 5px;
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  top: 6rem;
+  left: calc((100vw - 20rem) / 2 );
+  z-index: 2;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: middle;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+#modal p{
+  color: var(--lightFont);
+  text-align: center;
+}
+
+
 @media screen and (max-width: 400px){
   .table-item{
     font-size: 0.8rem;
