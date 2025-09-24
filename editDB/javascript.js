@@ -111,6 +111,7 @@ newItem.onclick = function(){
     
     
     const data = {
+      password: window.sessionStorage.getItem('adminPassword'),
       title: formData.get('title'),
       artist: formData.get('artist'),
       capo: formData.get('capo'),
@@ -304,6 +305,7 @@ editItem.onclick = function(){
     e.preventDefault();
 
     const data = {
+      password: window.sessionStorage.getItem('adminPassword'),
       action: 'update',
       id: Number(document.getElementById('edit-id').value),
       title: document.getElementById('edit-title').value,
