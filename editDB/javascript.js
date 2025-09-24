@@ -19,7 +19,6 @@ function clearModal(){
 }
 
 function createPasswordListener(){
-  document.getElementById("page-container").style.visibility = "hidden";
   showModal(
     `
     <p>Please enter your password</p>
