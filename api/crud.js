@@ -21,12 +21,10 @@ export default async function handler(req, res) {
     }
   }
 
-  if (action !== 'auth' && password !== process.env.ADMIN_PASSWORD) {
-    console.log("password check failed");
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
-
   if (action === 'create') {
+    if (password !== process.env.ADMIN_PASSWORD) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
     try {
       await pool.query(
         'INSERT INTO songs (title, artist, capo, chords, lyrics) VALUES ($1, $2, $3, $4, $5)',
@@ -60,6 +58,10 @@ export default async function handler(req, res) {
   }
 
   if (action === 'update') {
+    if (password !== process.env.ADMIN_PASSWORD) {
+      console.log("password check failed");
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
     try {
       await pool.query(
         'UPDATE songs SET title = $1, artist = $2, capo = $3, chords = $4, lyrics = $5 WHERE id = $6',
@@ -71,8 +73,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Database error' });
     }
   }
-
-
 
   return res.status(400).json({ error: 'Invalid action' });
 }
