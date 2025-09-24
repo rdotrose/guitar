@@ -13,9 +13,9 @@ export default async function handler(req, res) {
   const { password, title, artist, capo, chords, lyrics, action, id } = req.body;
 
   
-  if (action !== 'auth' && password !== process.env.ADMIN_PASSWORD) {
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
+  // if (action !== 'auth' && password !== process.env.ADMIN_PASSWORD) {
+  //   return res.status(403).json({ error: 'Unauthorized' });
+  // }
 
   
   if (action === 'auth') {

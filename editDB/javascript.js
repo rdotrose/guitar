@@ -27,9 +27,13 @@ function createPasswordListener(){
     `);
   document.getElementById("password-submit").onclick = function(){
     let password = document.getElementById("user-password").value.trim();
-    console.log(password);
     checkPassword(password);
   }
+  document.getElementById("user-password").addEventListener("keypress", function(event){
+    if(event.key == "Enter"){
+      document.getElementById("password-submit").click();
+    }
+  })
 }
 
 async function checkPassword(userPassword) {
