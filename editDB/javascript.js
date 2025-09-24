@@ -19,6 +19,7 @@ function clearModal(){
 }
 
 function createPasswordListener(){
+  document.getElementById("page-container").style.visibility = "hidden";
   showModal(
     `
     <p>Please enter your password</p>
@@ -62,6 +63,7 @@ async function checkPassword(userPassword) {
       //store password in sessionStorage for later use
       sessionStorage.setItem("adminPassword", userPassword);
       clearModal();
+      document.getElementById("page-container").style.visibility = "visible";
     }
   } catch (err) {
     console.error("Auth failed:", err);
