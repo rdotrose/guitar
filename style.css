@@ -27,7 +27,6 @@ body{
 #page-container{
   width: var(--tableSize);
   margin: 0 auto 3rem auto;
-  padding-bottom: 2rem;
 }
 
 #guitar-container{
@@ -317,6 +316,7 @@ input, textarea, select{
   #page-container{
     padding: 0;
     margin: 0;
+    margin-bottom: 3rem;
   }
   .query-small{
     display: inline;
