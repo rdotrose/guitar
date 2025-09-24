@@ -53,12 +53,7 @@ function mapRows(resultSet) {
 }
 
 function showLyrics(){
-  lyricChordContainer.style.display = "block";
   lyricChordContainer.style.left = "0vw";
-  // lyricChordContainer.scrollTop = 0;
-  // while (window.scrollY > 0){
-  //   window.scrollTop -= 1; 
-  // }
   toggleChords();
   lastScrollPos = window.scrollY;
   setTimeout(function(){window.scrollTo(0,0)}, 250);
@@ -68,8 +63,7 @@ function hideLyrics(){
   lyricChordContainer.style.left = "100vw";
   showChords = !showChords;
   animationContainer.style.display = "none";
-  setTimeout(function(){window.scrollTo(0,lastScrollPos);}, 150);
-  setTimeout(function(){lyricChordContainer.style.display="none";}, 500);
+  setTimeout(function(){window.scrollTo(0,lastScrollPos)}, 150);
 }
 
 //create back button function
