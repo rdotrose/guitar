@@ -27,6 +27,7 @@ function createPasswordListener(){
     `);
   document.getElementById("password-submit").onclick = function(){
     let password = document.getElementById("user-password").value.trim();
+    console.log(password);
     checkPassword(password);
   }
 }
@@ -53,10 +54,10 @@ async function checkPassword(userPassword) {
     if (!response.ok || !result.success) {
       showModal("<p>Incorrect password. Redirecting...</p>")
       window.location.href = "/index.html";
-      clearModal();
     } else {
       //store password in sessionStorage for later use
       sessionStorage.setItem("adminPassword", userPassword);
+      clearModal();
     }
   } catch (err) {
     console.error("Auth failed:", err);
