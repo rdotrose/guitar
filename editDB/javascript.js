@@ -25,6 +25,7 @@ function createPasswordListener(){
     <input id="user-password" type="password" autocomplete="off">
     <button id="password-submit">Submit</button>
     `);
+  document.getElementById("user-password").focus();
   document.getElementById("password-submit").onclick = function(){
     let password = document.getElementById("user-password").value.trim();
     checkPassword(password);
