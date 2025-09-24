@@ -203,6 +203,7 @@ body{
   gap:2px;
   background: #FFFFFF;
   width: 8.15rem;
+  position: relative;
 }
 
 .option-button{
@@ -244,6 +245,15 @@ body{
   z-index:1;
 }
 
+#left-border-filler{
+  position:absolute;
+  left:0;
+  top:10px;
+  z-index: 2;
+  height:10px;
+  border-left: 1px solid var(--darkBG);
+}
+
 input, textarea, select{
   display:block;
   margin-bottom: 1rem;
@@ -281,7 +291,7 @@ input, textarea, select{
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
   top: 6rem;
   left: calc((100vw - 20rem) / 2 );
-  z-index: 2;
+  z-index: 3;
   padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
