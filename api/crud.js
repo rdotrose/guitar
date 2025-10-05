@@ -62,10 +62,10 @@ export default async function handler(req, res) {
       console.log("password check failed");
       return res.status(403).json({ error: 'Unauthorized' });
     }
-    try {
+    try {      
       await pool.query(
-        'UPDATE songs SET title = $1, artist = $2, capo = $3, chords = $4, lyrics = $5 WHERE id = $6',
-        [title, artist, capo, chords, lyrics, id]
+        'UPDATE songs SET title = $1, artist = $2, capo = $3, chords = $4, lyrics = $5, times_played = $6, last_played = $7 WHERE id = $8',
+        [title, artist, capo, chords, lyrics, times_played, last_played, id]
       );
 
       return res.status(200).json({ message: 'Song updated successfully!' });
