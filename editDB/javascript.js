@@ -319,7 +319,7 @@ editItem.onclick = function(){
       capo: document.getElementById('edit-capo').value,
       chords: document.getElementById('edit-chords').value,
       lyrics: document.getElementById('edit-lyrics').value,
-      times_played: document.getElementById('edit-times-played').value,
+      times_played: Number(document.getElementById('edit-times-played').value),
       last_played: document.getElementById('edit-last-played').value
     };
 
