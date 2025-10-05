@@ -125,6 +125,9 @@ newItem.onclick = function(){
       lyrics: formData.get('lyrics'),
       action: 'create' // if you're using a unified API endpoint
     };
+
+    console.log("Sending");
+    console.log(data);
     
     
     try {
@@ -145,11 +148,12 @@ newItem.onclick = function(){
         showModal('<p>Error: ' + result.error + '</p>');
         setTimeout(clearModal, 1500);
       }
-    } catch (err) {
-      console.error('Request failed:', err);
-      showModal('<p>Error: ' + result.error + '</p>');
-      setTimeout(clearModal, 1500);
+    }catch (err) {
+    console.error('Request failed:', err);
+    showModal('<p>Request failed: ' + err.message + '</p>');
+    setTimeout(clearModal, 1500);
     }
+
   });
 }
 
