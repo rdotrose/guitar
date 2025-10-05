@@ -124,11 +124,7 @@ newItem.onclick = function(){
       chords: formData.get('chords'),
       lyrics: formData.get('lyrics'),
       action: 'create' // if you're using a unified API endpoint
-    };
-
-    console.log("Sending");
-    console.log(data);
-    
+    };    
     
     try {
       const response = await fetch('/api/crud', {
