@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     }
     try {      
       await pool.query(
-        'UPDATE songs SET title = $1, artist = $2, capo = $3, chords = $4, lyrics = $5, times_played = $6, last_played = $7 WHERE id = $8',
+        'UPDATE songs SET title = $2, artist = $3, capo = $4, chords = $5, lyrics = $6, times_played = $7, last_played = $8 WHERE id = $1',
         [title, artist, capo, chords, lyrics, times_played, last_played, id]
       );
 
