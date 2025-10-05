@@ -323,6 +323,8 @@ editItem.onclick = function(){
       last_played: document.getElementById('edit-last-played').value
     };
 
+    console.log(data);
+
     try {
       const response = await fetch('/api/crud', {
         method: 'POST',
