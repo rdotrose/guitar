@@ -286,9 +286,11 @@ body{
 }
 
 #search-id, #search-title{
+  display:block;
   justify-self: start;
   padding: 0.5rem 1rem;
   width: auto;
+  margin-bottom: 1rem;
 }
 
 #modal{
