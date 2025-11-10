@@ -438,9 +438,10 @@ body{
 
 @media screen and (max-width: 780px){
   .mobile-remove{
-    visibility: hidden;
+    display: none;
   }
   #chord-text-input{
     width: 3rem;
+    margin-right:0.25rem;
   }
 }
