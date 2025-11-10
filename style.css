@@ -262,7 +262,7 @@ body{
   border-left: 1px solid var(--darkBG);
 }
 
-#form-space input, #form-space textarea, #form-space select{
+#form-space input[type="text"], #form-space textarea, #form-space select{
   display:block;
   margin-bottom: 1rem;
   width:100%;
@@ -360,8 +360,7 @@ body{
   justify-content: left;
 }
 
-.chord-title,
-.chord-text{
+.chord-title, .chord-text{
   display: inline-block;
   font-weight: 500;
   color: var(--lightFont);
@@ -401,6 +400,7 @@ body{
   display: flex;
   margin: 0;
   align-items: center;
+  justify-content: center;
 }
 
 #fixed-bottom h2,
@@ -412,6 +412,9 @@ body{
   margin: 0 0.5rem 0 0;
 }
 
+#chord-options{
+  min-width: 10rem;
+}
 
 #chord-options span:hover{
   cursor: pointer;
