@@ -345,3 +345,93 @@ input, textarea, select{
   }
 }
 
+/* Builder Styles */
+
+.small-input{
+  width: 2rem;
+}
+
+#add-chord{
+  margin-top: 1rem;
+}
+
+#chord-builder{
+  display:flex;
+  justify-content: left;
+}
+
+textarea {
+  display: block;
+  height: 20rem;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "oswald";
+}
+
+.chord-title,
+.chord-text{
+  display: inline-block;
+  font-weight: 500;
+  color: var(--lightFont);
+  text-align: center;
+  margin: 0 auto 0.5rem auto;
+  background: var(--accent);
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+}
+
+.tab-container, #tab-container-input {
+  display: inline-block;
+  width: 4rem;
+  text-align: center;
+}
+
+#tab-container-input{
+  width: 6rem;
+}
+
+.tab-line {
+  text-align: center;
+}
+
+.lyric-container {
+  width: 42rem;
+}
+
+#fixed-bottom {
+  height: 2.5rem;
+  width: 100vw;
+  background: var(--lightBG2);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+
+#fixed-bottom h2,
+#fixed-bottom p, #fixed-bottom span {
+  margin: 0 2rem;
+}
+
+#fixed-bottom span {
+  margin: 0 0.5rem 0 0;
+}
+
+
+#chord-options span:hover{
+  cursor: pointer;
+}
+
+.centered-title {
+  text-align: center;
+}
+
+.builder-textarea {
+  margin: 2rem auto;
+}
