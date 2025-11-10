@@ -206,6 +206,8 @@ body{
   }
 }
 
+/* Edit DB styles */
+
 #edit-options{
   display: flex;
   gap:2px;
@@ -360,6 +362,7 @@ body{
 #chord-builder{
   display:flex;
   justify-content: left;
+  flex-wrap: wrap;
 }
 
 .chord-title, .chord-text{
@@ -431,4 +434,13 @@ body{
   display: block;
   height: 20rem;
   width: 100%;
+}
+
+@media screen and (max-width: 400px){
+  .mobile-remove{
+    visibility: hidden;
+  }
+  #chord-text-input{
+    width: 3rem;
+  }
 }
