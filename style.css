@@ -136,6 +136,10 @@ body{
   align-items: center;
 }
 
+.song-title{
+  display: inline-block;
+}
+
 .back{
   border:none;
   display: inline-block;
@@ -158,6 +162,8 @@ body{
 .autoscroll-menu{
   display:flex;
   justify-content: space-between;
+  position: sticky;
+  float: right;
 }
 
 .query-small{
