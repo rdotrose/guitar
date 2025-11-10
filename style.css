@@ -262,7 +262,7 @@ body{
   border-left: 1px solid var(--darkBG);
 }
 
-input, textarea, select{
+#form-space input, #form-space textarea, #form-space select{
   display:block;
   margin-bottom: 1rem;
   width:100%;
@@ -360,17 +360,6 @@ input, textarea, select{
   justify-content: left;
 }
 
-textarea {
-  display: block;
-  height: 20rem;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: "oswald";
-}
-
 .chord-title,
 .chord-text{
   display: inline-block;
@@ -434,4 +423,7 @@ textarea {
 
 .builder-textarea {
   margin: 2rem auto;
+  display: block;
+  height: 20rem;
+  width: 100%;
 }
