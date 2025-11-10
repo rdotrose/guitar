@@ -156,7 +156,7 @@ body{
 
 .toggle{
   padding: 0.15rem 0.5rem 0.2rem 0.5rem;
-  margin:0.1rem 0.1rem;
+  margin:1.4rem 0.1rem;
 }
 
 .autoscroll-menu{
@@ -164,6 +164,7 @@ body{
   justify-content: space-between;
   position: sticky;
   float: right;
+  top: 1rem;
 }
 
 .query-small{
