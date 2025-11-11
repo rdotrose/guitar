@@ -51,6 +51,7 @@ function addBreakTags(text, target){
     else{
       sub = str.substring(beg, end);
     }
+    console.log(sub);
     let node = document.createElement("p");
     node.innerHTML = sub.replaceAll("\n", "<br>");
     target.append(node);
@@ -61,6 +62,7 @@ function addBreakTags(text, target){
 
 lyricConvert.onclick = () => {
   const rawText = lyricInput.value;
+  console.log(rawText, lyricContainer);
   addBreakTags(rawText, lyricContainer);
 
 
@@ -100,3 +102,5 @@ finalize.onclick = function () {
 undo.onclick = function () {
   lyricContainer.innerHTML = previousText;
 };
+
+lyricInput.value = "Notes: \n\nIntro: \n\n";
