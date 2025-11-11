@@ -14,7 +14,7 @@
 </head>
 <body>
     <div id="page-container">
-        <h1 class="centered-title">Tab Builder for Database</h1>
+        <h1>Tab Builder for Database Input</h1>
       
         <h2>Build Chords</h2>
         <div id="chord-builder">
@@ -29,13 +29,19 @@
             <button id="add-chord">Add Chord</button>
           </div>
         </div><!-- end chord builder -->
+        <h2>Chord HTML for Database</h2>
         <textarea id="copy-chords" class="builder-textarea"></textarea>
       
         <h2>Raw HTML</h2>
-        <textarea id="lyric-input" class="builder-textarea"><p>Notes:</p><p>Intro:</p></textarea>
+        <textarea id="lyric-input" class="builder-textarea">
+          <pre>Notes: 
+
+            Intro:
+
+          </pre>
+        </textarea>
         <button id=lyric-convert>Convert</button>
         <h2>Tab Copy (Preview and Adjust)</h2>
-        <button id="undo">Undo Previous Change</button>
         <div id="lyric-container">
           <p> This is a sample</p>
           <p> Notes: The B, C#, D are played like power chords together. </p>
@@ -55,12 +61,13 @@
       
         </div>
         <button id="finalize">Finalize and Copy</button>
-      
+        <h2>Lyrics HTML for Database</h2>
         <textarea id="copy-HTML" class="builder-textarea"></textarea>
       </div><!-- end page container -->
       <div id="fixed-bottom">
       
         <h2 class="mobile-remove">Adjust</h2>
+        <button id="undo">Undo</button>
         <p class="mobile-remove">Chord Spacing</p>
         <select id="chord-text-type">
           <option value="spaced">Spaced</option>
