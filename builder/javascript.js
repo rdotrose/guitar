@@ -61,6 +61,7 @@ function addBreakTags(text, target){
 }
 
 lyricConvert.onclick = () => {
+  lyricContainer.innerHTML = "";
   const rawText = lyricInput.value;
   console.log(rawText, lyricContainer);
   addBreakTags(rawText, lyricContainer);
