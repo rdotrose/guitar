@@ -58,7 +58,7 @@ async function checkPassword(userPassword) {
 
     if (!response.ok || !result.success) {
       showModal("<p>Incorrect password. Redirecting...</p>")
-      window.location.href = "/index.html";
+      setTimeout(function(){window.location.href = "/index.html";}, 5000);
     } else {
       //store password in sessionStorage for later use
       sessionStorage.setItem("adminPassword", userPassword);
