@@ -40,7 +40,7 @@ function createPasswordListener(){
 async function checkPassword(userPassword) {
 
   if (!userPassword) {
-    window.location.href = "/index.html";
+    //window.location.href = "/index.html";
     return;
   }
 
