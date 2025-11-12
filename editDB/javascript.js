@@ -392,5 +392,5 @@ editItem.onclick = function(){
   });
   }
 
-  indow.onload = pageLoad;
+  window.onload = pageLoad;
 }
