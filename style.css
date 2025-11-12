@@ -154,9 +154,14 @@ body{
   cursor: pointer;
 }
 
-.toggle{
+.toggle, .toggle-accent{
   padding: 0.15rem 0.5rem 0.2rem 0.5rem;
   margin:1.4rem 0.1rem;
+}
+
+.toggle-accent{
+  background: var(--darkBG);
+  color: var(--lightFont);
 }
 
 .autoscroll-menu{
