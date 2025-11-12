@@ -17,6 +17,7 @@
         <h1>Tab Builder for Database Input</h1>
       
         <h2>Build Chords</h2>
+        <p>Enter the chord name and the fret numbers for that chord. Use an "X" if the string is not played. Chords with empty fret fields will still show up as "Defined Chords" below, but no HTML code will be generated.</p>
         <div id="chord-builder">
           <div id='tab-container-input'>
             <h3 class='chord-title'><input class="small-input"></h3>
@@ -31,6 +32,7 @@
         </div><!-- end chord builder -->
         <h2>Chord HTML for Database</h2>
         <p>Copy the HTML from this section and paste into the "Chords" field in the database.</p>
+        <button id="undo-chord">Undo</button>
         <textarea id="copy-chords" class="builder-textarea"></textarea>
       
         <h2>Raw Lyrics Text</h2>
@@ -49,7 +51,7 @@
       <div id="fixed-bottom">
       
         <h2 class="mobile-remove">Adjust</h2>
-        <button id="undo">Undo</button>
+        <button id="undo-lyric">Undo</button>
         <p class="mobile-remove">Chord Spacing</p>
         <select id="chord-text-type">
           <option value="spaced">Spaced</option>

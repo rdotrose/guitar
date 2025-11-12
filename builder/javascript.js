@@ -2,16 +2,36 @@ const lyricConvert = document.getElementById("lyric-convert");
 const lyricInput = document.getElementById("lyric-input");
 const lyricContainer = document.getElementById("lyric-container");
 const copyHTML = document.getElementById("copy-HTML");
+const copyChords = document.getElementById("copy-chords");
 const chordTextType = document.getElementById("chord-text-type");
 const chordTextInput = document.getElementById("chord-text-input");
 const finalize = document.getElementById("finalize");
-const undo = document.getElementById("undo");
-const previousText = [];
+const undoLyric = document.getElementById("undo-lyric");
+const undoChord = document.getElementById("undo-chord");
+const previousLyric = [];
+const previousChords = [];
+const previousChordsHTML = [];
 
 document.getElementById("add-chord").onclick = function(){
   const chordBuilder = document.getElementById("chord-builder");
   const chordInputs = chordBuilder.querySelectorAll("input");
   let node = document.createElement("div");
+  let abort = false;
+  let incHTML = true;
+  for(let i=0; i<7; i++){
+    if(chordInputs[i].value.trim() == ""){
+      if(i == 1){
+        abort = true;
+      }
+      else{
+        incHTML = false;
+      }
+    }
+  }
+  if(abort){
+    return;
+  }
+  else{
   node.innerHTML = chordGen(
     chordInputs[0].value.trim(), 
     chordInputs[1].value.trim(),
@@ -22,7 +42,12 @@ document.getElementById("add-chord").onclick = function(){
     chordInputs[6].value.trim()
   );
   chordBuilder.append(node);
-  document.getElementById("copy-chords").append(node.innerHTML);
+  previousChords.push(chordBuilder.innerHTML);
+  previousChordsHTML.push(copyChords.innerHTML);
+  }
+  if(incHTML){
+    copyChords.append(node.innerHTML);
+  }
   
   node = document.createElement("span");
   node.classList.add("chord-text");
@@ -66,7 +91,6 @@ lyricConvert.onclick = () => {
   console.log(rawText, lyricContainer);
   addBreakTags(rawText, lyricContainer);
 
-
   // converted = converted.replaceAll("@@p", "</p>");
   // converted = converted.replaceAll("@p", "<p>");
   // converted = converted.replaceAll("@br", "<br>");
@@ -80,7 +104,7 @@ lyricContainer.addEventListener("click", function (e) {
   //for future, try caretPositionFromPoint?
 
   if (range) {
-    previousText.push(lyricContainer.innerHTML);
+    previousLyric.push(lyricContainer.innerHTML);
     const tag = document.createElement("span");
     tag.classList.add("chord-text");
     tag.innerHTML = chordTextInput.value;
@@ -100,8 +124,13 @@ finalize.onclick = function () {
   navigator.clipboard.writeText(lyricContainer.innerHTML);
 };
 
-undo.onclick = function () {
-  lyricContainer.innerHTML = previousText.pop();
+undoLyric.onclick = function () {
+  lyricContainer.innerHTML = previousLyric.pop();
 };
+
+undoChord.onclick = function(){
+  chordBuilder.innerHTML = previousChords.pop();
+  copyChords.innerHTML = previousChordsHTML.pop();
+}
 
 lyricInput.value = "Notes: \n\nIntro: \n\n";

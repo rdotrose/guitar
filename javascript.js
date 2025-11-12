@@ -15,7 +15,7 @@ const showChanges = document.getElementById("show-changes");
 const changes = document.getElementById("changes");
 const date = new Date();
 const timestamp = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-const changeLog = [];
+const autoscrollDisplay = document.getElementById("autoscroll-display");
 
 let currentId;
 let currentTitle;
@@ -32,7 +32,8 @@ let lastScrollPos = 0;
 let showChords = false;
 let scrollInterval;
 let scrollOn = false;
-let scrollSpeed = 1;
+let scrollDistance = 1;
+let scrollSpeed = 1
 let scrollFreq = 152;
 
 function mapRows(resultSet) {
@@ -103,19 +104,21 @@ function autoscroll(){
   if(scrollOn){
     // autoscrollToggle.disabled = false;
     clearInterval(scrollInterval);
+    autoscrollDisplay.style.visibility = "hidden";
   }
   else{ //begin autoscroll
     // autoscroll.disabled = true;
+    autoscrollDisplay.style.visibility = "visible";
     scrollInterval = setInterval(function(){
       let currentPos = window.scrollY;
-      if((currentPos + scrollSpeed) > (lyricChordContainer.clientHeight - window.innerHeight)){
+      if((currentPos + scrollDistance) > (lyricChordContainer.clientHeight - window.innerHeight)){
         window.scrollTo(0, lyricChordContainer.clientHeight - window.innerHeight);
         // autoscrollToggle.disabled = false;
         scrollOn = false;
         clearInterval(scrollInterval);
       }
       else{
-        window.scrollTo(0, currentPos + scrollSpeed);
+        window.scrollTo(0, currentPos + scrollDistance);
       }
     }, scrollFreq);
   }
@@ -129,6 +132,8 @@ autoscrollToggle.onclick = function(){
 scrollMinus.onclick = function(){
   if(scrollFreq < 254){
     scrollFreq += 17;
+    scrollSpeed--;
+    autoscrollDisplay.innerHTML = scrollSpeed;
   }
   if(scrollOn){
     clearInterval(scrollInterval);
@@ -141,6 +146,8 @@ scrollMinus.onclick = function(){
 scrollPlus.onclick = function(){
   if(scrollFreq > 16){
     scrollFreq -= 17;
+    scrollSpeed++;
+    autoscrollDisplay.innerHTML = scrollSpeed;
   }
   if(scrollOn){
     clearInterval(scrollInterval);
