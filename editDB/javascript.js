@@ -67,7 +67,7 @@ async function checkPassword(userPassword) {
     }
   } catch (err) {
     console.error("Auth failed:", err);
-    window.location.href = "/index.html";
+    //window.location.href = "/index.html";
   }
 }
 
