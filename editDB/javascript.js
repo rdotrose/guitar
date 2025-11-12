@@ -349,6 +349,7 @@ editItem.onclick = function(){
   });
 
   function pageLoad(){
+    console.log("pageLoad running");
     document.getElementById("new-form").addEventListener('submit', async function(e){
     e.preventDefault();
     
@@ -392,5 +393,11 @@ editItem.onclick = function(){
   });
   }
 
-  window.onload = pageLoad;
+  
+  console.log("Script loaded");
+  window.onload = function() {
+    console.log("window.onload fired");
+    pageLoad();
+  };
+
 }
