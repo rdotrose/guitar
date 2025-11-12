@@ -348,5 +348,49 @@ editItem.onclick = function(){
     }
   });
 
+  async function pageLoad(){
+    document.getElementById("new-form").addEventListener('submit', async function(e){
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    
+    
+    const data = {
+      password: window.sessionStorage.getItem('adminPassword'),
+      title: formData.get('title'),
+      artist: formData.get('artist'),
+      capo: formData.get('capo'),
+      chords: formData.get('chords'),
+      lyrics: formData.get('lyrics'),
+      action: 'create' // if you're using a unified API endpoint
+    };    
+    
+    try {
+      const response = await fetch('/api/crud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
+      const result = await response.json();
+      console.log(result);
+
+      if (response.ok) {
+        showModal('<p>Song saved successfully!</p>');
+        setTimeout(clearModal, 1500);
+        e.target.reset(); // Clear the form
+      } else {
+        showModal('<p>Error: ' + result.error + '</p>');
+        setTimeout(clearModal, 1500);
+      }
+    }catch (err) {
+    console.error('Request failed:', err);
+    showModal('<p>Request failed: ' + err.message + '</p>');
+    setTimeout(clearModal, 1500);
+    }
+
+  });
+  }
+
+  pageLoad();
 }
