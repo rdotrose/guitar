@@ -40,7 +40,7 @@ function createPasswordListener(){
 async function checkPassword(userPassword) {
 
   if (!userPassword) {
-    //window.location.href = "/index.html";
+    window.location.href = "/index.html";
     return;
   }
 
@@ -58,7 +58,7 @@ async function checkPassword(userPassword) {
 
     if (!response.ok || !result.success) {
       showModal("<p>Incorrect password. Redirecting...</p>")
-      setTimeout(function(){window.location.href = "/index.html";}, 5000);
+      window.location.href = "/index.html";
     } else {
       //store password in sessionStorage for later use
       sessionStorage.setItem("adminPassword", userPassword);
@@ -67,7 +67,7 @@ async function checkPassword(userPassword) {
     }
   } catch (err) {
     console.error("Auth failed:", err);
-    //window.location.href = "/index.html";
+    window.location.href = "/index.html";
   }
 }
 
@@ -348,7 +348,7 @@ editItem.onclick = function(){
     }
   });
 
-  async function pageLoad(){
+  function pageLoad(){
     document.getElementById("new-form").addEventListener('submit', async function(e){
     e.preventDefault();
     
@@ -392,5 +392,5 @@ editItem.onclick = function(){
   });
   }
 
-  pageLoad();
+  indow.onload = pageLoad;
 }
