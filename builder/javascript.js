@@ -20,7 +20,7 @@ document.getElementById("add-chord").onclick = function(){
   let incHTML = true;
   for(let i=0; i<7; i++){
     if(chordInputs[i].value.trim() == ""){
-      if(i == 1){
+      if(i == 0){
         abort = true;
       }
       else{
