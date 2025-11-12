@@ -4,6 +4,8 @@ const editItem = document.getElementById("edit-item");
 const formSpace = document.getElementById("form-space");
 const modal = document.getElementById("modal");
 
+console.log("Hello");
+
 function showModal(displayText){
   modal.style.opacity = 0.98;
   modal.style.pointerEvents = "auto";
