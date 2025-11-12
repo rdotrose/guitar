@@ -160,8 +160,13 @@ body{
 }
 
 .toggle-accent{
-  background: var(--darkBG);
+  background: var(--medBG);
   color: var(--lightFont);
+  border-radius: 5px;
+}
+
+#autoscroll-display{
+  visibility: hidden;
 }
 
 .autoscroll-menu{
