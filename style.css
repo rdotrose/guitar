@@ -353,6 +353,7 @@ body{
 
 .small-input{
   width: 2rem;
+  text-align:center;
 }
 
 #add-chord{
@@ -363,6 +364,7 @@ body{
   display:flex;
   justify-content: left;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .chord-title, .chord-text{
@@ -415,6 +417,10 @@ body{
 
 #fixed-bottom span {
   margin: 0 0.5rem 0 0;
+}
+
+#chord-text-input{
+  width: 3rem;
 }
 
 #chord-options{

@@ -6,7 +6,7 @@ const chordTextType = document.getElementById("chord-text-type");
 const chordTextInput = document.getElementById("chord-text-input");
 const finalize = document.getElementById("finalize");
 const undo = document.getElementById("undo");
-let previousText = "";
+const previousText = [];
 
 document.getElementById("add-chord").onclick = function(){
   const chordBuilder = document.getElementById("chord-builder");
@@ -80,7 +80,7 @@ lyricContainer.addEventListener("click", function (e) {
   //for future, try caretPositionFromPoint?
 
   if (range) {
-    previousText = lyricContainer.innerHTML;
+    previousText.push(lyricContainer.innerHTML);
     const tag = document.createElement("span");
     tag.classList.add("chord-text");
     tag.innerHTML = chordTextInput.value;
@@ -101,7 +101,7 @@ finalize.onclick = function () {
 };
 
 undo.onclick = function () {
-  lyricContainer.innerHTML = previousText;
+  lyricContainer.innerHTML = previousText.pop();
 };
 
 lyricInput.value = "Notes: \n\nIntro: \n\n";
