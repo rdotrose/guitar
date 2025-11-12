@@ -33,7 +33,7 @@ let showChords = false;
 let scrollInterval;
 let scrollOn = false;
 let scrollDistance = 1;
-let scrollSpeed = 1
+let scrollSpeed = 7;
 let scrollFreq = 152;
 
 function mapRows(resultSet) {
