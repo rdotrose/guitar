@@ -58,7 +58,7 @@ document.getElementById("add-chord").onclick = function(){
   }
 }
 
-const chordGen = (chord, f6, f5, f4, f3, f2, f1) =>
+const chordGen = (chord, f1, f2, f3, f4, f5, f6) =>
   `<div class="tab-container"><h3 class="chord-title">${chord}</h3><div class="tab-line">—<span class="fret">${f1}</span>—</div><div class="tab-line">—<span class="fret">${f2}</span>—</div><div class="tab-line">—<span class="fret">${f3}</span>—</div><div class="tab-line">—<span class="fret">${f4}</span>—</div><div class="tab-line">—<span class="fret">${f5}</span>—</div><div class="tab-line">—<span class="fret">${f6}</span>—</div></div>`;
 
 function addBreakTags(text, target){
