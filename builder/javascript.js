@@ -34,12 +34,12 @@ document.getElementById("add-chord").onclick = function(){
   else{
   node.innerHTML = chordGen(
     chordInputs[0].value.trim(), 
-    chordInputs[1].value.trim(),
-    chordInputs[2].value.trim(),
-    chordInputs[3].value.trim(),
-    chordInputs[4].value.trim(),
-    chordInputs[5].value.trim(),
-    chordInputs[6].value.trim()
+    chordInputs[1].value.trim().toUpperCase(),
+    chordInputs[2].value.trim().toUpperCase(),
+    chordInputs[3].value.trim().toUpperCase(),
+    chordInputs[4].value.trim().toUpperCase(),
+    chordInputs[5].value.trim().toUpperCase(),
+    chordInputs[6].value.trim().toUpperCase()
   );
   chordBuilder.append(node);
   previousChords.push(chordBuilder.innerHTML);
