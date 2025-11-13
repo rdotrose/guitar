@@ -43,10 +43,10 @@ document.getElementById("add-chord").onclick = function(){
     chordInputs[5].value.trim().toUpperCase(),
     chordInputs[6].value.trim().toUpperCase()
   );
-  chordBuilder.append(node);
   previousChords.push(chordBuilder.innerHTML);
   previousChordsHTML.push(copyChords.innerHTML);
   previousChordOptions.push(chordOptions.innerHTML);
+  chordBuilder.append(node);
   }
   if(incHTML){
     copyChords.append(node.innerHTML);
@@ -132,9 +132,11 @@ undoLyric.onclick = function () {
 };
 
 undoChord.onclick = function(){
-  chordBuilder.innerHTML = previousChords.pop();
-  copyChords.innerHTML = previousChordsHTML.pop();
-  chordOptions.innerHTML = previousChordOptions.pop();
+  if(chordBuilder.length > 0){
+    chordBuilder.innerHTML = previousChords.pop();
+    copyChords.innerHTML = previousChordsHTML.pop();
+    chordOptions.innerHTML = previousChordOptions.pop();
+  }
 }
 
 lyricInput.value = "Notes: \n\nIntro: \n\n";
