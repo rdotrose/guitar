@@ -132,7 +132,7 @@ undoLyric.onclick = function () {
 };
 
 undoChord.onclick = function(){
-  if(chordBuilder.length > 0){
+  if(previousChords.length > 0){
     chordBuilder.innerHTML = previousChords.pop();
     copyChords.innerHTML = previousChordsHTML.pop();
     chordOptions.innerHTML = previousChordOptions.pop();
