@@ -1,8 +1,10 @@
 const lyricConvert = document.getElementById("lyric-convert");
 const lyricInput = document.getElementById("lyric-input");
 const lyricContainer = document.getElementById("lyric-container");
+const chordBuilder = document.getElementById("chord-builder");
 const copyHTML = document.getElementById("copy-HTML");
 const copyChords = document.getElementById("copy-chords");
+const chordOptions = document.getElementById("chord-options");
 const chordTextType = document.getElementById("chord-text-type");
 const chordTextInput = document.getElementById("chord-text-input");
 const finalize = document.getElementById("finalize");
@@ -11,9 +13,9 @@ const undoChord = document.getElementById("undo-chord");
 const previousLyric = [];
 const previousChords = [];
 const previousChordsHTML = [];
+const previousChordOptions = [];
 
 document.getElementById("add-chord").onclick = function(){
-  const chordBuilder = document.getElementById("chord-builder");
   const chordInputs = chordBuilder.querySelectorAll("input");
   let node = document.createElement("div");
   let abort = false;
@@ -44,6 +46,7 @@ document.getElementById("add-chord").onclick = function(){
   chordBuilder.append(node);
   previousChords.push(chordBuilder.innerHTML);
   previousChordsHTML.push(copyChords.innerHTML);
+  previousChordOptions.push(chordOptions.innerHTML);
   }
   if(incHTML){
     copyChords.append(node.innerHTML);
@@ -131,6 +134,7 @@ undoLyric.onclick = function () {
 undoChord.onclick = function(){
   chordBuilder.innerHTML = previousChords.pop();
   copyChords.innerHTML = previousChordsHTML.pop();
+  chordOptions.innerHTML = previousChordOptions.pop();
 }
 
 lyricInput.value = "Notes: \n\nIntro: \n\n";
