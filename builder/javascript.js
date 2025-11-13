@@ -128,7 +128,9 @@ finalize.onclick = function () {
 };
 
 undoLyric.onclick = function () {
-  lyricContainer.innerHTML = previousLyric.pop();
+  if(previousLyric.length > 0){
+    lyricContainer.innerHTML = previousLyric.pop();
+  }
 };
 
 undoChord.onclick = function(){
