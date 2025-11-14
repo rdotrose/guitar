@@ -14,6 +14,29 @@ const previousLyric = [];
 const previousChords = [];
 const previousChordsHTML = [];
 const previousChordOptions = [];
+let currentDragItem;
+
+function dragStartHandler(e){
+  currentDragItem = e.target;
+}
+
+function dragoverHandler(e){
+  e.preventDefault();
+}
+
+function dropHandler(e){
+  e.preventDefault();
+  const position = document.caretPositionFromPoint(e.clientX, e.clientY);
+  
+  if(position){
+    const range = document.createRange();
+    range.setStart(position.offsetNode, position.offset);
+    range.collapse(true);
+    
+    range.insertNode(currentDragItem);
+  }
+  currentDragItem = null;
+}
 
 document.getElementById("add-chord").onclick = function(){
   const chordInputs = chordBuilder.querySelectorAll("input");
@@ -82,6 +105,8 @@ function addBreakTags(text, target){
     console.log(sub);
     let node = document.createElement("p");
     node.innerHTML = sub.replaceAll("\n", "<br>");
+    node.ondragover = dragoverHandler;
+    node.ondrop = dropHandler;
     target.append(node);
 
     beg = end + 2;
@@ -103,13 +128,18 @@ lyricConvert.onclick = () => {
 };
 
 lyricContainer.addEventListener("click", function (e) {
-  const range = document.caretRangeFromPoint(e.clientX, e.clientY);
-  //for future, try caretPositionFromPoint?
+  const position = document.caretPositionFromPoint(e.clientX, e.clientY);
 
-  if (range) {
+  if (position) {
+    const range = document.createRange();
+    range.setStart(position.offsetNode, position.offset);
+    range.collapse(true);
+
     previousLyric.push(lyricContainer.innerHTML);
     const tag = document.createElement("span");
     tag.classList.add("chord-text");
+    tag.draggable = true;
+    tag.ondragstart = dragStartHandler;
     tag.innerHTML = chordTextInput.value;
     if (chordTextType.value == "spaced") {
       range.insertNode(document.createTextNode(" "));
