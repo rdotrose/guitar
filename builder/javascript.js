@@ -33,6 +33,9 @@ function dropHandler(e){
     range.setStart(position.offsetNode, position.offset);
     range.collapse(true);
 
+    //update undo array
+    previousLyric.push(lyricContainer.innerHTML);
+
     //avoid nested span tags
     let currentTarget = range.startContainer;
     if(currentTarget.nodeType === Node.TEXT_NODE){
