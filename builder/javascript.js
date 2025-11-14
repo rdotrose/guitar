@@ -32,8 +32,33 @@ function dropHandler(e){
     const range = document.createRange();
     range.setStart(position.offsetNode, position.offset);
     range.collapse(true);
-    
-    range.insertNode(currentDragItem);
+
+    //avoid nested span tags
+    let currentTarget = range.startContainer;
+    if(currentTarget.nodeType === Node.TEXT_NODE){
+      currentTarget = currentTarget.parentElement;
+    }
+
+    //see if closest node is a span tag, then insert
+    const existingSpan = currentTarget.closest('span');
+    if(existingSpan){
+      if (chordTextType.value == "spaced") {
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+        existingSpan.parentNode.insertBefore(currentDragItem, existingSpan);
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+      } else {
+        existingSpan.parentNode.insertBefore(currentDragItem, existingSpan);
+      }
+    }
+    else{
+      if (chordTextType.value == "spaced") {
+        range.insertNode(document.createTextNode(" "));
+        range.insertNode(currentDragItem);
+        range.insertNode(document.createTextNode(" "));
+      } else {
+        range.insertNode(currentDragItem);
+      }
+    }
   }
   currentDragItem = null;
 }
@@ -155,12 +180,32 @@ lyricContainer.addEventListener("click", function (e) {
     tag.draggable = true;
     tag.ondragstart = dragStartHandler;
     tag.innerHTML = chordTextInput.value;
-    if (chordTextType.value == "spaced") {
-      range.insertNode(document.createTextNode(" "));
-      range.insertNode(tag);
-      range.insertNode(document.createTextNode(" "));
-    } else {
-      range.insertNode(tag);
+
+    //avoid nested span tags
+    let currentTarget = range.startContainer;
+    if(currentTarget.nodeType === Node.TEXT_NODE){
+      currentTarget = currentTarget.parentElement;
+    }
+
+    //see if closest node is a span tag, then insert
+    const existingSpan = currentTarget.closest('span');
+    if(existingSpan){
+      if (chordTextType.value == "spaced") {
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+        existingSpan.parentNode.insertBefore(tag, existingSpan);
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+      } else {
+        existingSpan.parentNode.insertBefore(tag, existingSpan);
+      }
+    }
+    else{
+      if (chordTextType.value == "spaced") {
+        range.insertNode(document.createTextNode(" "));
+        range.insertNode(tag);
+        range.insertNode(document.createTextNode(" "));
+      } else {
+        range.insertNode(tag);
+      }
     }
   }
 });
