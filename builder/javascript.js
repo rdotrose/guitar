@@ -38,6 +38,20 @@ function dropHandler(e){
   currentDragItem = null;
 }
 
+function redoDragHandlers(){
+  const paragraphs = lyricContainer.querySelectorAll("p");
+  for(let i=0; i<paragraphs.length; i++){
+    paragraphs[i].ondragover = dragoverHandler;
+    paragraphs[i].ondrop = dropHandler;
+  }
+
+  const spans = lyricContainer.querySelectorAll('span');
+  for(let i=0; i<spans.length; i++){
+    spans[i].draggable = true;
+    spans[i].ondragstart = dragStartHandler;
+  }
+}
+
 document.getElementById("add-chord").onclick = function(){
   const chordInputs = chordBuilder.querySelectorAll("input");
   let node = document.createElement("div");
@@ -160,6 +174,7 @@ finalize.onclick = function () {
 undoLyric.onclick = function () {
   if(previousLyric.length > 0){
     lyricContainer.innerHTML = previousLyric.pop();
+    redoDragHandlers();
   }
 };
 
