@@ -66,6 +66,72 @@ function dropHandler(e){
   currentDragItem = null;
 }
 
+function touchStartHandler(e) {
+  currentDragItem = e.target;
+  //reduce opacity for visual feedback
+  e.target.style.opacity = "0.6"; 
+}
+
+
+function touchMoveHandler(e) {
+  e.preventDefault(); // prevent scrolling
+  const touch = e.touches[0];
+  const elem = currentDragItem;
+  if (elem) {
+    elem.style.position = "absolute";
+    elem.style.left = touch.clientX + "px";
+    elem.style.top = touch.clientY + "px";
+  }
+}
+
+
+function touchEndHandler(e) {
+  const touch = e.changedTouches[0];
+  const position = document.caretPositionFromPoint(touch.clientX, touch.clientY);
+
+  if (position && currentDragItem) {
+    const range = document.createRange();
+    range.setStart(position.offsetNode, position.offset);
+    range.collapse(true);
+
+    previousLyric.push(lyricContainer.innerHTML);
+
+    let currentTarget = range.startContainer;
+    if (currentTarget.nodeType === Node.TEXT_NODE) {
+      currentTarget = currentTarget.parentElement;
+    }
+
+    const existingSpan = currentTarget.closest('span');
+    if (existingSpan) {
+      if (chordTextType.value === "spaced") {
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+        existingSpan.parentNode.insertBefore(currentDragItem, existingSpan);
+        existingSpan.parentNode.insertBefore(document.createTextNode(" "), existingSpan);
+      } else {
+        existingSpan.parentNode.insertBefore(currentDragItem, existingSpan);
+      }
+    } else {
+      if (chordTextType.value === "spaced") {
+        range.insertNode(document.createTextNode(" "));
+        range.insertNode(currentDragItem);
+        range.insertNode(document.createTextNode(" "));
+      } else {
+        range.insertNode(currentDragItem);
+      }
+    }
+  }
+
+  if (currentDragItem) {
+    currentDragItem.style.opacity = "1";
+    currentDragItem.style.position = "";
+    currentDragItem.style.left = "";
+    currentDragItem.style.top = "";
+  }
+  currentDragItem = null;
+}
+
+
+
 function redoDragHandlers(){
   const paragraphs = lyricContainer.querySelectorAll("p");
   for(let i=0; i<paragraphs.length; i++){
@@ -77,6 +143,12 @@ function redoDragHandlers(){
   for(let i=0; i<spans.length; i++){
     spans[i].draggable = true;
     spans[i].ondragstart = dragStartHandler;
+
+    //mobile event handlers    
+    spans[i].addEventListener("touchstart", touchStartHandler, { passive: false });
+    spans[i].addEventListener("touchmove", touchMoveHandler, { passive: false });
+    spans[i].addEventListener("touchend", touchEndHandler, { passive: false });
+
   }
 }
 
@@ -161,6 +233,11 @@ lyricConvert.onclick = () => {
 };
 
 lyricContainer.addEventListener("click", function (e) {
+  const clientX = e.clientX || (e.touches ? e.touches[0].clientX : null);
+  const clientY = e.clientY || (e.touches ? e.touches[0].clientY : null);
+  if (clientX === null || clientY === null) return;
+
+
   const position = document.caretPositionFromPoint(e.clientX, e.clientY);
 
   if (position) {
@@ -172,9 +249,14 @@ lyricContainer.addEventListener("click", function (e) {
     const tag = document.createElement("span");
     tag.classList.add("chord-text");
     tag.draggable = true;
-    tag.addEventListener("touchstart", function(event){event.preventDefault()});
     tag.ondragstart = dragStartHandler;
     tag.innerHTML = chordTextInput.value;
+
+    //mobile listeners added
+    tag.addEventListener("touchstart", touchStartHandler, { passive: false });
+    tag.addEventListener("touchmove", touchMoveHandler, { passive: false });
+    tag.addEventListener("touchend", touchEndHandler, { passive: false });
+
 
     //avoid nested span tags
     let currentTarget = range.startContainer;
