@@ -78,11 +78,10 @@ function touchMoveHandler(e) {
   const touch = e.touches[0];  //corresponds to a single finger touch or the first in a two-finger press
   const elem = currentDragItem;
   if (elem) {
-    //calculate the coordinates relative to lyric-container
-
+    console.log(touch.clientX, touch.clientY)
     elem.style.position = "absolute";
     elem.style.left = touch.clientX + "px";
-    elem.style.top = touch.clientX + window.scrollY + "px";
+    elem.style.top = touch.clientY + window.scrollY + "px";
   }
 }
 
