@@ -79,14 +79,10 @@ function touchMoveHandler(e) {
   const elem = currentDragItem;
   if (elem) {
     //calculate the coordinates relative to lyric-container
-    //clientX and clientY are measured relative to the viewport (screen)
-    const containerRect = lyricContainer.getBoundingClientRect();
-    const relativeX = touch.clientX - containerRect.left;
-    const relativeY = touch.clientY - containerRect.top
 
     elem.style.position = "absolute";
-    elem.style.left = relativeX + "px";
-    elem.style.top = relativeY + "px";
+    elem.style.left = touch.clientX + "px";
+    elem.style.top = touch.clientX + window.scrollY + "px";
   }
 }
 
