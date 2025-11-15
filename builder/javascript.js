@@ -144,7 +144,6 @@ function addBreakTags(text, target){
     else{
       sub = str.substring(beg, end);
     }
-    console.log(sub);
     let node = document.createElement("p");
     node.innerHTML = sub.replaceAll("\n", "<br>");
     node.ondragover = dragoverHandler;
@@ -158,9 +157,6 @@ function addBreakTags(text, target){
 lyricConvert.onclick = () => {
   lyricContainer.innerHTML = "";
   let rawText = lyricInput.value;
-  rawText = rawText.replaceAll('draggable="true"', '');
-  rawText = rawText.replaceAll("</p><p>","</p>\n\n<p>" );
-  console.log(rawText, lyricContainer);
   addBreakTags(rawText, lyricContainer);
 };
 
@@ -211,8 +207,12 @@ lyricContainer.addEventListener("click", function (e) {
 
 finalize.onclick = function () {
   copyHTML.value = "";
-  copyHTML.value = lyricContainer.innerHTML;
-  navigator.clipboard.writeText(lyricContainer.innerHTML);
+  let rawCode = lyricContainer.innerHTML;
+  rawCode = rawCode.replaceAll('draggable="true"', '');
+  rawCode = rawCode.replaceAll("</p><p>","</p>\n\n<p>" );
+  console.log(rawCode);
+  copyHTML.value = rawCode;
+  navigator.clipboard.writeText(rawCode);
 };
 
 undoLyric.onclick = function () {
