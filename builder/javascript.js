@@ -157,7 +157,7 @@ function addBreakTags(text, target){
 
 lyricConvert.onclick = () => {
   lyricContainer.innerHTML = "";
-  const rawText = lyricInput.value;
+  let rawText = lyricInput.value;
   rawText = rawText.replaceAll('draggable="true"', '');
   rawText = rawText.replaceAll("</p><p>","</p>\n\n<p>" );
   console.log(rawText, lyricContainer);
