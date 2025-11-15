@@ -69,24 +69,30 @@ function dropHandler(e){
 function touchStartHandler(e) {
   currentDragItem = e.target;
   //reduce opacity for visual feedback
-  // e.target.style.opacity = "0.6"; 
+  e.target.style.opacity = "0.6"; 
 }
 
 
 function touchMoveHandler(e) {
   e.preventDefault(); // prevent scrolling
-  const touch = e.touches[0];
+  const touch = e.touches[0];  //corresponds to a single finger touch or the first in a two-finger press
   const elem = currentDragItem;
   if (elem) {
+    //calculate the coordinates relative to lyric-container
+    //clientX and clientY are measured relative to the viewport (screen)
+    const containerRect = lyricContainer.getBoundingClientRect();
+    const relativeX = touch.clientX - containerRect.left;
+    const relativeY = touch.clientY - containerRect.top
+
     elem.style.position = "absolute";
-    elem.style.left = touch.clientX + "px";
-    elem.style.top = touch.clientY + "px";
+    elem.style.left = relativeX + "px";
+    elem.style.top = relativeY + "px";
   }
 }
 
 
 function touchEndHandler(e) {
-  const touch = e.changedTouches[0];
+  const touch = e.changedTouches[0];  //corresponds to the movement of the first finger
   const position = document.caretPositionFromPoint(touch.clientX, touch.clientY);
 
   if (position && currentDragItem) {
@@ -233,6 +239,7 @@ lyricConvert.onclick = () => {
 };
 
 lyricContainer.addEventListener("click", function (e) {
+  if (!chordTextInput.value) return;
   const clientX = e.clientX || (e.touches ? e.touches[0].clientX : null);
   const clientY = e.clientY || (e.touches ? e.touches[0].clientY : null);
   if (clientX === null || clientY === null) return;
