@@ -69,7 +69,7 @@ function dropHandler(e){
 function touchStartHandler(e) {
   currentDragItem = e.target;
   //reduce opacity for visual feedback
-  e.target.style.opacity = "0.6"; 
+  // e.target.style.opacity = "0.6"; 
 }
 
 
