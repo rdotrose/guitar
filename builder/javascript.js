@@ -158,15 +158,10 @@ function addBreakTags(text, target){
 lyricConvert.onclick = () => {
   lyricContainer.innerHTML = "";
   const rawText = lyricInput.value;
+  rawText = rawText.replaceAll('draggable="true"', '');
+  rawText = rawText.replaceAll("</p><p>","</p>\n\n<p>" );
   console.log(rawText, lyricContainer);
   addBreakTags(rawText, lyricContainer);
-
-  // converted = converted.replaceAll("@@p", "</p>");
-  // converted = converted.replaceAll("@p", "<p>");
-  // converted = converted.replaceAll("@br", "<br>");
-  // converted = converted.replaceAll("@@sp", "</span>");
-  // converted = converted.replaceAll("@sp", '<span class="chord-text">');
-  // converted = converted.replaceAll(/(?:\r\n|\r|\n)/g, "");
 };
 
 lyricContainer.addEventListener("click", function (e) {
@@ -181,6 +176,7 @@ lyricContainer.addEventListener("click", function (e) {
     const tag = document.createElement("span");
     tag.classList.add("chord-text");
     tag.draggable = true;
+    tag.addEventListener("touchstart", function(event){event.preventDefault()});
     tag.ondragstart = dragStartHandler;
     tag.innerHTML = chordTextInput.value;
 

@@ -115,6 +115,7 @@ function autoscroll(){
         window.scrollTo(0, lyricChordContainer.clientHeight - window.innerHeight);
         // autoscrollToggle.disabled = false;
         scrollOn = false;
+        autoscrollDisplay.style.visibility = "hidden";
         clearInterval(scrollInterval);
       }
       else{
