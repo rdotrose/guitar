@@ -80,8 +80,8 @@ function touchMoveHandler(e) {
   if (elem) {
     console.log(touch.clientX, touch.clientY)
     elem.style.position = "absolute";
-    elem.style.left = touch.clientX + elem.clientWidth/2 + "px";
-    elem.style.top = touch.clientY + elem.clientHeight/2 + window.scrollY + "px";
+    elem.style.left = touch.clientX - elem.clientWidth/2 + "px";
+    elem.style.top = touch.clientY - elem.clientHeight/2 + window.scrollY + "px";
   }
 }
 
