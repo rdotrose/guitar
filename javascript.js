@@ -246,6 +246,10 @@ function popTable(objArray){
       lyricsInsert.querySelectorAll("p")[0].innerHTML = "<p> Capo: " + capoVal + "</p>" + lyricsInsert.querySelectorAll("p")[0].innerHTML;
       currentId = objArray[i].id;
       currentTitle = objArray[i].title;
+      const pageHeight = window.innerHeight;
+      if(lyricChordContainer.clientHeight < pageHeight){
+        lyricsChordContainer.style.height = String(pageHeight) + "px";
+      }
       showLyrics();
       //create button that can update last played
     }
