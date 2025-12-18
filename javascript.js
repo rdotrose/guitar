@@ -248,7 +248,7 @@ function popTable(objArray){
       currentTitle = objArray[i].title;
       const pageHeight = window.innerHeight;
       if(lyricChordContainer.clientHeight < pageHeight){
-        lyricsChordContainer.style.height = String(pageHeight) + "px";
+        lyricChordContainer.style.height = String(pageHeight) + "px";
       }
       showLyrics();
       //create button that can update last played
